@@ -38,21 +38,23 @@
                                   | PFLogInFieldsPasswordForgotten
                                   );
         logInController.delegate = self;
+        logInController.signUpController.delegate = self;
         [self presentViewController:logInController animated:YES completion:nil];
-        
     }
 }
 
 - (void)logInViewController:(PFLogInViewController *)controller
                didLogInUser:(PFUser *)user {
-    [self performSegueWithIdentifier: @"showTabBar" sender:nil];
-
-}
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self performSegueWithIdentifier: @"showTabBar" sender:nil];
 }
+-(void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
+   
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self performSegueWithIdentifier: @"showTabBar" sender:nil];
+}
+
 
 
 
