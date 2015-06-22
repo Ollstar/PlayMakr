@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		A73927611B35C651007F5461 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A73927601B35C651007F5461 /* main.m */; };
 		A73927641B35C651007F5461 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A73927631B35C651007F5461 /* AppDelegate.m */; };
-		A73927671B35C651007F5461 /* ConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73927661B35C651007F5461 /* ConnectViewController.m */; };
-		A739276A1B35C651007F5461 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73927691B35C651007F5461 /* ProfileViewController.m */; };
 		A739276D1B35C651007F5461 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A739276B1B35C651007F5461 /* Main.storyboard */; };
 		A739276F1B35C651007F5461 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A739276E1B35C651007F5461 /* Images.xcassets */; };
 		A73927721B35C651007F5461 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A73927701B35C651007F5461 /* LaunchScreen.xib */; };
@@ -36,8 +34,12 @@
 		A73927B51B35DB11007F5461 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73927B41B35DB11007F5461 /* Social.framework */; };
 		A73927B71B35DB18007F5461 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73927B61B35DB18007F5461 /* Foundation.framework */; };
 		A73927BA1B35E2E4007F5461 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73927B91B35E2E4007F5461 /* LoginViewController.m */; };
-		A73927BD1B35F0A8007F5461 /* UserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A73927BC1B35F0A8007F5461 /* UserTableViewCell.m */; };
-		A73927C31B362B9D007F5461 /* PlayrUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A73927C21B362B9D007F5461 /* PlayrUser.m */; };
+		A748FFE11B37B0D7005005EE /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = A748FFDA1B37B0D7005005EE /* home.png */; };
+		A748FFE21B37B0D7005005EE /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A748FFDB1B37B0D7005005EE /* home@2x.png */; };
+		A748FFE31B37B0D7005005EE /* NothingFoundCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A748FFDC1B37B0D7005005EE /* NothingFoundCell.xib */; };
+		A748FFE41B37B0D7005005EE /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A748FFDE1B37B0D7005005EE /* SearchViewController.m */; };
+		A748FFEF1B37C6E3005005EE /* SearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A748FFEE1B37C6E3005005EE /* SearchResultCell.m */; };
+		A748FFF71B37F058005005EE /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A748FFF61B37F058005005EE /* ProfileViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,10 +58,6 @@
 		A73927601B35C651007F5461 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A73927621B35C651007F5461 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A73927631B35C651007F5461 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A73927651B35C651007F5461 /* ConnectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConnectViewController.h; sourceTree = "<group>"; };
-		A73927661B35C651007F5461 /* ConnectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConnectViewController.m; sourceTree = "<group>"; };
-		A73927681B35C651007F5461 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
-		A73927691B35C651007F5461 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		A739276C1B35C651007F5461 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A739276E1B35C651007F5461 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A73927711B35C651007F5461 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -89,10 +87,16 @@
 		A73927B61B35DB18007F5461 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A73927B81B35E2E4007F5461 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		A73927B91B35E2E4007F5461 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		A73927BB1B35F0A8007F5461 /* UserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTableViewCell.h; sourceTree = "<group>"; };
-		A73927BC1B35F0A8007F5461 /* UserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTableViewCell.m; sourceTree = "<group>"; };
-		A73927C11B362B9D007F5461 /* PlayrUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayrUser.h; sourceTree = "<group>"; };
-		A73927C21B362B9D007F5461 /* PlayrUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayrUser.m; sourceTree = "<group>"; };
+		A748FFDA1B37B0D7005005EE /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		A748FFDB1B37B0D7005005EE /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@2x.png"; sourceTree = "<group>"; };
+		A748FFDC1B37B0D7005005EE /* NothingFoundCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NothingFoundCell.xib; sourceTree = "<group>"; };
+		A748FFDD1B37B0D7005005EE /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		A748FFDE1B37B0D7005005EE /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		A748FFED1B37C6E3005005EE /* SearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultCell.h; sourceTree = "<group>"; };
+		A748FFEE1B37C6E3005005EE /* SearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultCell.m; sourceTree = "<group>"; };
+		A748FFF01B37C8A6005005EE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A748FFF51B37F058005005EE /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileViewController.h; path = ../ProfileViewController.h; sourceTree = "<group>"; };
+		A748FFF61B37F058005005EE /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileViewController.m; path = ../ProfileViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,19 +161,20 @@
 			children = (
 				A73927621B35C651007F5461 /* AppDelegate.h */,
 				A73927631B35C651007F5461 /* AppDelegate.m */,
-				A73927C11B362B9D007F5461 /* PlayrUser.h */,
-				A73927C21B362B9D007F5461 /* PlayrUser.m */,
 				A73927B81B35E2E4007F5461 /* LoginViewController.h */,
 				A73927B91B35E2E4007F5461 /* LoginViewController.m */,
-				A73927651B35C651007F5461 /* ConnectViewController.h */,
-				A73927661B35C651007F5461 /* ConnectViewController.m */,
-				A73927681B35C651007F5461 /* ProfileViewController.h */,
-				A73927691B35C651007F5461 /* ProfileViewController.m */,
-				A73927BB1B35F0A8007F5461 /* UserTableViewCell.h */,
-				A73927BC1B35F0A8007F5461 /* UserTableViewCell.m */,
+				A748FFF51B37F058005005EE /* ProfileViewController.h */,
+				A748FFF61B37F058005005EE /* ProfileViewController.m */,
+				A748FFDD1B37B0D7005005EE /* SearchViewController.h */,
+				A748FFDE1B37B0D7005005EE /* SearchViewController.m */,
+				A748FFED1B37C6E3005005EE /* SearchResultCell.h */,
+				A748FFEE1B37C6E3005005EE /* SearchResultCell.m */,
 				A739276B1B35C651007F5461 /* Main.storyboard */,
 				A739276E1B35C651007F5461 /* Images.xcassets */,
 				A73927701B35C651007F5461 /* LaunchScreen.xib */,
+				A748FFDC1B37B0D7005005EE /* NothingFoundCell.xib */,
+				A748FFDA1B37B0D7005005EE /* home.png */,
+				A748FFDB1B37B0D7005005EE /* home@2x.png */,
 				A739275E1B35C651007F5461 /* Supporting Files */,
 			);
 			path = PlayMakr;
@@ -204,6 +209,7 @@
 		A73927871B35D0A3007F5461 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A748FFF01B37C8A6005005EE /* UIKit.framework */,
 				A73927B61B35DB18007F5461 /* Foundation.framework */,
 				A73927B41B35DB11007F5461 /* Social.framework */,
 				A73927B21B35DB09007F5461 /* Accounts.framework */,
@@ -309,6 +315,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A748FFE21B37B0D7005005EE /* home@2x.png in Resources */,
+				A748FFE11B37B0D7005005EE /* home.png in Resources */,
+				A748FFE31B37B0D7005005EE /* NothingFoundCell.xib in Resources */,
 				A739276D1B35C651007F5461 /* Main.storyboard in Resources */,
 				A73927721B35C651007F5461 /* LaunchScreen.xib in Resources */,
 				A739276F1B35C651007F5461 /* Images.xcassets in Resources */,
@@ -329,13 +338,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A739276A1B35C651007F5461 /* ProfileViewController.m in Sources */,
 				A73927641B35C651007F5461 /* AppDelegate.m in Sources */,
-				A73927BD1B35F0A8007F5461 /* UserTableViewCell.m in Sources */,
-				A73927671B35C651007F5461 /* ConnectViewController.m in Sources */,
+				A748FFEF1B37C6E3005005EE /* SearchResultCell.m in Sources */,
 				A73927611B35C651007F5461 /* main.m in Sources */,
-				A73927C31B362B9D007F5461 /* PlayrUser.m in Sources */,
 				A73927BA1B35E2E4007F5461 /* LoginViewController.m in Sources */,
+				A748FFF71B37F058005005EE /* ProfileViewController.m in Sources */,
+				A748FFE41B37B0D7005005EE /* SearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
