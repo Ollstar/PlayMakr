@@ -244,28 +244,6 @@ static NSString *const NothingFoundCellIdentifier = @"NothingFoundCell";
         NSLog(@"%@", profileUser);
         ProfileViewController *myDestinationVC = [self.storyboard instantiateViewControllerWithIdentifier:@"profileVC"];
         UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:myDestinationVC];
-        PFRelation *relation = [[PFUser currentUser] objectForKey:@"connected"];
-        
-        PFQuery *query = relation.query;
-        [query whereKey:@"objectId" equalTo:profileUser.objectId];
-        NSInteger count = [query countObjects];
-        
-        if (count == 0) {
-            myDestinationVC.isConnected = NO;
-            UIBarButtonItem *followButton = [[UIBarButtonItem alloc] initWithTitle:@"Follow" style: UIBarButtonItemStylePlain target:self action:@selector(followButtonPressed:)];
-            myDestinationVC.navigationItem.rightBarButtonItem = followButton;
-        } else {
-            myDestinationVC.isConnected = YES;
-            UIBarButtonItem *unfollowButton = [[UIBarButtonItem alloc] initWithTitle:@"Unfollow" style: UIBarButtonItemStylePlain target:self action:@selector(unfollowButtonPressed:)];
-            myDestinationVC.navigationItem.rightBarButtonItem = unfollowButton;
-        }
-        if (profileUser) {
-            
-            myDestinationVC.isConnected = YES;
-        }
-        
-        myDestinationVC.isConnected = NO;
-        myDestinationVC.isCurrentUser = NO;
         myDestinationVC.profileUser = profileUser;
         [self presentViewController:nav animated:YES completion:nil];
 

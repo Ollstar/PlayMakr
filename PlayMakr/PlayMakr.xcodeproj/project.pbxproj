@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A72A3EAC1B39720A000C6F78 /* PMUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E637E81B3946B4009B652B /* PMUtility.m */; };
+		A72A3EAD1B39720A000C6F78 /* PMCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E637EB1B3946F8009B652B /* PMCache.m */; };
+		A72A3EAE1B39720A000C6F78 /* PMConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E637F11B394A7A009B652B /* PMConstants.m */; };
+		A72A3EAF1B39730C000C6F78 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A748FFF01B37C8A6005005EE /* UIKit.framework */; };
 		A73927611B35C651007F5461 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A73927601B35C651007F5461 /* main.m */; };
 		A73927641B35C651007F5461 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A73927631B35C651007F5461 /* AppDelegate.m */; };
 		A739276D1B35C651007F5461 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A739276B1B35C651007F5461 /* Main.storyboard */; };
@@ -32,7 +36,6 @@
 		A73927B11B35DAEF007F5461 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A73927B01B35DAEF007F5461 /* libsqlite3.dylib */; };
 		A73927B31B35DB09007F5461 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73927B21B35DB09007F5461 /* Accounts.framework */; };
 		A73927B51B35DB11007F5461 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73927B41B35DB11007F5461 /* Social.framework */; };
-		A73927B71B35DB18007F5461 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73927B61B35DB18007F5461 /* Foundation.framework */; };
 		A73927BA1B35E2E4007F5461 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73927B91B35E2E4007F5461 /* LoginViewController.m */; };
 		A748FFE11B37B0D7005005EE /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = A748FFDA1B37B0D7005005EE /* home.png */; };
 		A748FFE21B37B0D7005005EE /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A748FFDB1B37B0D7005005EE /* home@2x.png */; };
@@ -40,6 +43,7 @@
 		A748FFE41B37B0D7005005EE /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A748FFDE1B37B0D7005005EE /* SearchViewController.m */; };
 		A748FFEF1B37C6E3005005EE /* SearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A748FFEE1B37C6E3005005EE /* SearchResultCell.m */; };
 		A748FFF71B37F058005005EE /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A748FFF61B37F058005005EE /* ProfileViewController.m */; };
+		A7E637FC1B3968BE009B652B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73927B61B35DB18007F5461 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A72A3EA51B396CF2000C6F78 /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
+		A72A3EA81B396D58000C6F78 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A739275B1B35C651007F5461 /* PlayMakr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayMakr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A739275F1B35C651007F5461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A73927601B35C651007F5461 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -97,6 +103,12 @@
 		A748FFF01B37C8A6005005EE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A748FFF51B37F058005005EE /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileViewController.h; path = ../ProfileViewController.h; sourceTree = "<group>"; };
 		A748FFF61B37F058005005EE /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileViewController.m; path = ../ProfileViewController.m; sourceTree = "<group>"; };
+		A7E637E71B3946B4009B652B /* PMUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMUtility.h; sourceTree = "<group>"; };
+		A7E637E81B3946B4009B652B /* PMUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMUtility.m; sourceTree = "<group>"; };
+		A7E637EA1B3946F8009B652B /* PMCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMCache.h; sourceTree = "<group>"; };
+		A7E637EB1B3946F8009B652B /* PMCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMCache.m; sourceTree = "<group>"; };
+		A7E637F01B394A7A009B652B /* PMConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMConstants.h; sourceTree = "<group>"; };
+		A7E637F11B394A7A009B652B /* PMConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +116,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A73927B71B35DB18007F5461 /* Foundation.framework in Frameworks */,
+				A72A3EAF1B39730C000C6F78 /* UIKit.framework in Frameworks */,
+				A7E637FC1B3968BE009B652B /* Foundation.framework in Frameworks */,
 				A73927B51B35DB11007F5461 /* Social.framework in Frameworks */,
 				A73927B31B35DB09007F5461 /* Accounts.framework in Frameworks */,
 				A73927B11B35DAEF007F5461 /* libsqlite3.dylib in Frameworks */,
@@ -169,6 +182,12 @@
 				A748FFDE1B37B0D7005005EE /* SearchViewController.m */,
 				A748FFED1B37C6E3005005EE /* SearchResultCell.h */,
 				A748FFEE1B37C6E3005005EE /* SearchResultCell.m */,
+				A7E637E71B3946B4009B652B /* PMUtility.h */,
+				A7E637E81B3946B4009B652B /* PMUtility.m */,
+				A7E637EA1B3946F8009B652B /* PMCache.h */,
+				A7E637EB1B3946F8009B652B /* PMCache.m */,
+				A7E637F01B394A7A009B652B /* PMConstants.h */,
+				A7E637F11B394A7A009B652B /* PMConstants.m */,
 				A739276B1B35C651007F5461 /* Main.storyboard */,
 				A739276E1B35C651007F5461 /* Images.xcassets */,
 				A73927701B35C651007F5461 /* LaunchScreen.xib */,
@@ -184,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				A739275F1B35C651007F5461 /* Info.plist */,
+				A72A3EA51B396CF2000C6F78 /* Prefix.pch */,
 				A73927601B35C651007F5461 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -209,6 +229,7 @@
 		A73927871B35D0A3007F5461 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A72A3EA81B396D58000C6F78 /* AVFoundation.framework */,
 				A748FFF01B37C8A6005005EE /* UIKit.framework */,
 				A73927B61B35DB18007F5461 /* Foundation.framework */,
 				A73927B41B35DB11007F5461 /* Social.framework */,
@@ -338,6 +359,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A72A3EAC1B39720A000C6F78 /* PMUtility.m in Sources */,
+				A72A3EAD1B39720A000C6F78 /* PMCache.m in Sources */,
+				A72A3EAE1B39720A000C6F78 /* PMConstants.m in Sources */,
 				A73927641B35C651007F5461 /* AppDelegate.m in Sources */,
 				A748FFEF1B37C6E3005005EE /* SearchResultCell.m in Sources */,
 				A73927611B35C651007F5461 /* main.m in Sources */,
