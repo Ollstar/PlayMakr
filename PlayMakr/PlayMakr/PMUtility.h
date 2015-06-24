@@ -27,10 +27,10 @@
 
 + (void)sendFollowingPushNotification:(PFUser *)user;
 
-//+ (void)drawSideDropShadowForRect:(CGRect)rect inContext:(CGContextRef)context;
-//+ (void)drawSideAndBottomDropShadowForRect:(CGRect)rect inContext:(CGContextRef)context;
-//+ (void)drawSideAndTopDropShadowForRect:(CGRect)rect inContext:(CGContextRef)context;
-//+ (void)addBottomDropShadowToNavigationBarForNavigationController:(UINavigationController *)navigationController;
++ (void)drawSideDropShadowForRect:(CGRect)rect inContext:(CGContextRef)context;
++ (void)drawSideAndBottomDropShadowForRect:(CGRect)rect inContext:(CGContextRef)context;
++ (void)drawSideAndTopDropShadowForRect:(CGRect)rect inContext:(CGContextRef)context;
++ (void)addBottomDropShadowToNavigationBarForNavigationController:(UINavigationController *)navigationController;
 
 + (PFQuery *)queryForActivitiesOnSkill:(PFObject *)skill cachePolicy:(PFCachePolicy)cachePolicy;
 

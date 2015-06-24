@@ -10,8 +10,7 @@
 
 @implementation PMConstants
 
-NSString *const kPAPUserDefaultsActivityFeedViewControllerLastRefreshKey    = @"com.parse.Anypic.userDefaults.activityFeedViewController.lastRefresh";
-NSString *const kPAPUserDefaultsCacheFacebookFriendsKey                     = @"com.parse.Anypic.userDefaults.cache.facebookFriends";
+NSString *const kPMRUserDefaultsActivityFeedViewControllerLastRefreshKey    = @"Oliver.PlayMakr.userDefaults.activityFeedViewController.lastRefresh";
 
 
 #pragma mark - Launch URLs
@@ -23,17 +22,17 @@ NSString *const kPAPLaunchURLHostTakePicture = @"camera";
 
 NSString *const PAPAppDelegateApplicationDidReceiveRemoteNotification           = @"Oliver.PlayMakr.appDelegate.applicationDidReceiveRemoteNotification";
 NSString *const PAPUtilityUserFollowingChangedNotification                      = @"Oliver.PlayMakr.utility.userFollowingChanged";
-NSString *const PAPUtilityUserLikedUnlikedPhotoCallbackFinishedNotification     = @"Oliver.PlayMakr.utility.userLikedUnlikedPhotoCallbackFinished";
+NSString *const PMUtilityUserEndorsedUnendorsedSkillCallbackFinishedNotification     = @"Oliver.PlayMakr.utility.userEndorsedUnendorsedSkillCallbackFinished";
 NSString *const PAPUtilityDidFinishProcessingProfilePictureNotification         = @"Oliver.PlayMakr.utility.didFinishProcessingProfilePictureNotification";
 NSString *const PAPTabBarControllerDidFinishEditingPhotoNotification            = @"Oliver.PlayMakr.tabBarController.didFinishEditingPhoto";
 NSString *const PAPTabBarControllerDidFinishImageFileUploadNotification         = @"com.parse.Anypic.tabBarController.didFinishImageFileUploadNotification";
 NSString *const PAPPhotoDetailsViewControllerUserDeletedPhotoNotification       = @"com.parse.Anypic.photoDetailsViewController.userDeletedPhoto";
-NSString *const PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotification  = @"com.parse.Anypic.photoDetailsViewController.userLikedUnlikedPhotoInDetailsViewNotification";
+NSString *const PMSkillDetailsViewControllerUserEndorsedUnendorsedSkillNotification  = @"Oliver.PlayMakr.skillDetailsViewController.userEndorsedUnendorsedInDetailsViewNotification";
 NSString *const PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification   = @"com.parse.Anypic.photoDetailsViewController.userCommentedOnPhotoInDetailsViewNotification";
 
 
 #pragma mark - User Info Keys
-NSString *const PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotificationUserInfoLikedKey = @"liked";
+NSString *const PMSkillDetailsViewControllerUserEndorsedUnendorsedSkillNotificationUserInfoEndorsedKey = @"endorsed";
 NSString *const kPAPEditPhotoViewControllerUserInfoCommentKey = @"comment";
 
 #pragma mark - Installation Class
@@ -54,7 +53,7 @@ NSString *const kPMActivityContentKey     = @"content";
 NSString *const kPMActivitySkillKey       = @"skill";
 
 // Type values
-NSString *const kPMActivityTypeLike       = @"endorse";
+NSString *const kPMActivityTypeEndorse       = @"endorse";
 NSString *const kPMActivityTypeFollow     = @"follow";
 NSString *const kPMActivityTypeComment    = @"comment";
 NSString *const kPMActivityTypeJoined     = @"joined";
@@ -74,7 +73,7 @@ NSString *const kPMUserPrivateChannelKey                       = @"channel";
 NSString *const kPMSkillClassKey = @"Skill";
 
 // Field keys
-NSString *const kPAPPhotoPictureKey         = @"image";
+NSString *const kPMSkillPictureKey         = @"image";
 NSString *const kPAPPhotoThumbnailKey       = @"thumbnail";
 NSString *const kPMSkillUserKey            = @"user";
 
@@ -101,16 +100,16 @@ NSString *const kAPNSBadgeKey = @"badge";
 NSString *const kAPNSSoundKey = @"sound";
 
 // the following keys are intentionally kept short, APNS has a maximum payload limit
-NSString *const kPAPPushPayloadPayloadTypeKey          = @"p";
-NSString *const kPAPPushPayloadPayloadTypeActivityKey  = @"a";
+NSString *const kPMRPushPayloadPayloadTypeKey          = @"p";
+NSString *const kPMRPushPayloadPayloadTypeActivityKey  = @"a";
 
-NSString *const kPAPPushPayloadActivityTypeKey     = @"t";
-NSString *const kPAPPushPayloadActivityLikeKey     = @"l";
-NSString *const kPAPPushPayloadActivityCommentKey  = @"c";
-NSString *const kPAPPushPayloadActivityFollowKey   = @"f";
+NSString *const kPMRPushPayloadActivityTypeKey     = @"t";
+NSString *const kPMRPushPayloadActivityEndorseKey     = @"e";
+NSString *const kPMRPushPayloadActivityCommentKey  = @"c";
+NSString *const kPMRPushPayloadActivityFollowKey   = @"f";
 
-NSString *const kPAPPushPayloadFromUserObjectIdKey = @"fu";
-NSString *const kPAPPushPayloadToUserObjectIdKey   = @"tu";
-NSString *const kPAPPushPayloadPhotoObjectIdKey    = @"pid";
+NSString *const kPMRPushPayloadFromUserObjectIdKey = @"fu";
+NSString *const kPMRPushPayloadToUserObjectIdKey   = @"tu";
+NSString *const kPMRPushPayloadSkillObjectIdKey    = @"sid";
 
 @end

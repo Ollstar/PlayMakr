@@ -130,10 +130,8 @@ static NSString *const NothingFoundCellIdentifier = @"NothingFoundCell";
 //        [query whereKey:@"objectId" notEqualTo:[PFUser currentUser].objectId];
 
         NSString *searchThis = [_searchedBar.text lowercaseString];
-        #warning key you wanted to search here
-        if (![searchThis isEqualToString:@""]) {
+
             [query whereKey:@"username" containsString:searchThis];
-        }
     }
     
     [query orderByAscending:@"username"];

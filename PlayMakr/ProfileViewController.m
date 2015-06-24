@@ -39,7 +39,6 @@
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style: UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
         
         self.navigationItem.leftBarButtonItem = backButton;
-        [self determineConnectButton];
         
         
         

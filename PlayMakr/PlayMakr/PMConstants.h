@@ -8,14 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum {
+    PMRHomeTabBarItemIndex = 0,
+    PMREmptyTabBarItemIndex = 1,
+    PMRActivityTabBarItemIndex = 2
+} PMRTabBarControllerViewControllerIndex;
+
 @interface PMConstants : NSObject
 
-
-
-
 #pragma mark - NSUserDefaults
-extern NSString *const kPAPUserDefaultsActivityFeedViewControllerLastRefreshKey;
-extern NSString *const kPAPUserDefaultsCacheFacebookFriendsKey;
+extern NSString *const kPMRUserDefaultsActivityFeedViewControllerLastRefreshKey;
 
 #pragma mark - Launch URLs
 
@@ -30,20 +32,20 @@ extern NSString *const PMUtilityDidFinishProcessingProfilePictureNotification;
 extern NSString *const PAPTabBarControllerDidFinishEditingPhotoNotification;
 extern NSString *const PAPTabBarControllerDidFinishImageFileUploadNotification;
 extern NSString *const PAPPhotoDetailsViewControllerUserDeletedPhotoNotification;
-extern NSString *const PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotification;
+extern NSString *const PMSkillDetailsViewControllerUserEndorsedUnendorsedSkillNotification;
 extern NSString *const PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification;
 
 
 #pragma mark - User Info Keys
-extern NSString *const PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotificationUserInfoLikedKey;
+extern NSString *const PMSkillDetailsViewControllerUserEndorsedUnendorsedSkillNotificationUserInfoEndorsedKey;
 extern NSString *const kPAPEditPhotoViewControllerUserInfoCommentKey;
 
 
 #pragma mark - Installation Class
 
 // Field keys
-extern NSString *const kPMInstallationUserKey;
-extern NSString *const kPMInstallationChannelsKey;
+extern NSString *const kPMRInstallationUserKey;
+extern NSString *const kPMRInstallationChannelsKey;
 
 
 #pragma mark - PFObject Activity Class
@@ -80,7 +82,7 @@ extern NSString *const kPMUserPrivateChannelKey;
 extern NSString *const kPMSkillClassKey;
 
 // Field keys
-extern NSString *const kPMPhotoPictureKey;
+extern NSString *const kPMSkillPictureKey;
 extern NSString *const kPAPPhotoThumbnailKey;
 extern NSString *const kPMSkillUserKey;
 
@@ -106,16 +108,16 @@ extern NSString *const kAPNSAlertKey;
 extern NSString *const kAPNSBadgeKey;
 extern NSString *const kAPNSSoundKey;
 
-extern NSString *const kPAPPushPayloadPayloadTypeKey;
-extern NSString *const kPAPPushPayloadPayloadTypeActivityKey;
+extern NSString *const kPMRPushPayloadPayloadTypeKey;
+extern NSString *const kPMRPushPayloadPayloadTypeActivityKey;
 
-extern NSString *const kPAPPushPayloadActivityTypeKey;
-extern NSString *const kPAPPushPayloadActivityLikeKey;
-extern NSString *const kPAPPushPayloadActivityCommentKey;
-extern NSString *const kPAPPushPayloadActivityFollowKey;
+extern NSString *const kPMRPushPayloadActivityTypeKey;
+extern NSString *const kPMRPushPayloadActivityEndorseKey;
+extern NSString *const kPMRPushPayloadActivityCommentKey;
+extern NSString *const kPMRPushPayloadActivityFollowKey;
 
-extern NSString *const kPAPPushPayloadFromUserObjectIdKey;
-extern NSString *const kPAPPushPayloadToUserObjectIdKey;
-extern NSString *const kPAPPushPayloadPhotoObjectIdKey;
+extern NSString *const kPMRPushPayloadFromUserObjectIdKey;
+extern NSString *const kPMRPushPayloadToUserObjectIdKey;
+extern NSString *const kPMRPushPayloadSkillObjectIdKey;
 
 @end
