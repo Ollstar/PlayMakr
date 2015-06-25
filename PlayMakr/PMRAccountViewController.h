@@ -7,8 +7,10 @@
 
 #import "PMRSkillTimelineViewController.h"
 
-@interface PMRAccountViewController : PMRSkillTimelineViewController
+@interface PMRAccountViewController : PMRSkillTimelineViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
 
 @property (nonatomic, strong) PFUser *user;
+@property (strong, nonatomic) IBOutlet PFImageView *userProfileImageView;
+
 
 @end

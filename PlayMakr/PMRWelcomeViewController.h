@@ -6,7 +6,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ParseUI/ParseUI.h>
 
-@interface PMRWelcomeViewController : UIViewController
+@interface PMRWelcomeViewController : UIViewController <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
 @end

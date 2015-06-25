@@ -6,7 +6,7 @@
 //
 
 #import "PMRSettingsActionSheetDelegate.h"
-//#import "PMRFindFriendsViewController.h"
+#import "PMRFindFriendsViewController.h"
 #import "PMRAccountViewController.h"
 #import "AppDelegate.h"
 #import "PMConstants.h"
@@ -56,6 +56,8 @@ typedef enum {
         }
         case kPAPSettingsFindFriends:
         {
+            PMRFindFriendsViewController *findFriendsVC = [[PMRFindFriendsViewController alloc] init];
+            [navController pushViewController:findFriendsVC animated:YES];
             break;
         }
         case kPAPSettingsLogout:

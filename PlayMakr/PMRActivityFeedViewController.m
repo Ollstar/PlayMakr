@@ -74,20 +74,13 @@ static NSString *const kPAPActivityTypeJoinedString = @"joined Anypic";
     [texturedBackgroundView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundLeather.png"]]];
     self.tableView.backgroundView = texturedBackgroundView;
 
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LogoNavigationBar.png"]];
+    self.navigationItem.title= @"The Feed";
 
     // Add Settings button
     self.navigationItem.rightBarButtonItem = [[PMRSettingsButtonItem alloc] initWithTarget:self action:@selector(settingsButtonAction:)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidReceiveRemoteNotification:) name:PMAppDelegateApplicationDidReceiveRemoteNotification object:nil];
     
-    self.blankTimelineView = [[UIView alloc] initWithFrame:self.tableView.bounds];
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setBackgroundImage:[UIImage imageNamed:@"ActivityFeedBlank.png"] forState:UIControlStateNormal];
-    [button setFrame:CGRectMake(24.0f, 113.0f, 271.0f, 140.0f)];
-    [button addTarget:self action:@selector(inviteFriendsButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.blankTimelineView addSubview:button];
 
     lastRefresh = [[NSUserDefaults standardUserDefaults] objectForKey:kPMRUserDefaultsActivityFeedViewControllerLastRefreshKey];
 }

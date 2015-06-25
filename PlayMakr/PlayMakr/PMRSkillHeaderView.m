@@ -142,7 +142,7 @@
 - (void)setSkill:(PFObject *)aSkill {
 
     // user's avatar
-    PFUser *user = [self.skill objectForKey:kPMSkillUserKey];
+    PFUser *user = [aSkill objectForKey:kPMSkillUserKey];
     PFFile *profilePictureSmall = [user objectForKey:kPMUserProfilePicSmallKey];
     [self.avatarImageView setFile:profilePictureSmall];
     
@@ -177,7 +177,7 @@
     CGRect userButtonFrame = CGRectMake(userButtonPoint.x, userButtonPoint.y, userButtonSize.width, userButtonSize.height);
     [self.userButton setFrame:userButtonFrame];
     
-    NSTimeInterval timeInterval = [[self.skill createdAt] timeIntervalSinceNow];
+    NSTimeInterval timeInterval = [[aSkill createdAt] timeIntervalSinceNow];
     NSString *timestamp = [self.timeIntervalFormatter stringForTimeInterval:timeInterval];
     [self.timestampLabel setText:timestamp];
     

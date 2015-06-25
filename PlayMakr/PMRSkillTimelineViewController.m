@@ -311,7 +311,10 @@
         
         cell.photoButton.tag = indexPath.section;
         cell.imageView.image = [UIImage imageNamed:@"PlaceholderPhoto.png"];
-        cell.imageView.file = [object objectForKey:kPMSkillPictureKey];
+        
+        
+        PFObject *skill = [self.objects objectAtIndex:indexPath.section];
+        cell.imageView.file = [skill objectForKey:kPMSkillPictureKey];
         
         // PFQTVC will take care of asynchronously downloading files, but will only load them when the tableview is not moving. If the data is there, let's load it right away.
         if ([cell.imageView.file isDataAvailable]) {

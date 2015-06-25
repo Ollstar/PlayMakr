@@ -6,6 +6,7 @@
 //
 
 #import "PMRSkillTimelineViewController.h"
+#import "PMRFindFriendsViewController.h"
 
 @interface PMRHomeViewController : PMRSkillTimelineViewController
 

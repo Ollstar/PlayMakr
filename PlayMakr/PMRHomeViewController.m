@@ -8,7 +8,6 @@
 #import "PMRHomeViewController.h"
 #import "PMRSettingsActionSheetDelegate.h"
 #import "PMRSettingsButtonItem.h"
-//#import "PMRFindFriendsViewController.h"
 
 @interface PMRHomeViewController ()
 @property (nonatomic, strong) PMRSettingsActionSheetDelegate *settingsActionSheetDelegate;
@@ -25,18 +24,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LogoNavigationBar.png"]];
+    self.navigationItem.title = @"PlayMakr";
+//    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LogoNavigationBar.png"]];
 
     self.navigationItem.rightBarButtonItem = [[PMRSettingsButtonItem alloc] initWithTarget:self action:@selector(settingsButtonAction:)];
     
-    self.blankTimelineView = [[UIView alloc] initWithFrame:self.tableView.bounds];
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake( 33.0f, 96.0f, 253.0f, 173.0f);
-    [button setBackgroundImage:[UIImage imageNamed:@"HomeTimelineBlank.png"] forState:UIControlStateNormal];
+//    self.blankTimelineView = [[UIView alloc] initWithFrame:self.tableView.bounds];
+//    
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    button.frame = CGRectMake( 33.0f, 96.0f, 253.0f, 173.0f);
+//    [button setBackgroundImage:[UIImage imageNamed:@"HomeTimelineBlank.png"] forState:UIControlStateNormal];
 //    [button addTarget:self action:@selector(inviteFriendsButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.blankTimelineView addSubview:button];
+//    [self.blankTimelineView addSubview:button];
 }
 
 

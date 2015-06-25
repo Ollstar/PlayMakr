@@ -61,7 +61,7 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
 
     [super viewDidLoad];
     
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LogoNavigationBar.png"]];
+    self.navigationItem.title = @"Skill";
 
     [self.navigationItem setHidesBackButton:YES];
 

@@ -21,7 +21,7 @@
     CGSize textBoundingSize = textBoundingRect.size;
     CGFloat textBoundingWidth = ceilf(textBoundingSize.width);
     CGFloat textBoundingHeight = ceilf(textBoundingSize.height);
-    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake( ([UIScreen mainScreen].bounds.size.width - textBoundingWidth)/2.0f, 160.0f, textBoundingWidth, textBoundingHeight)];
+    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake( ([UIScreen mainScreen].bounds.size.width - textBoundingWidth)/2.0f, 100.0f, textBoundingWidth, textBoundingHeight)];
     [textLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:18.0f]];
     [textLabel setLineBreakMode:NSLineBreakByWordWrapping];
     [textLabel setNumberOfLines:0];

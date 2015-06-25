@@ -60,7 +60,7 @@ NSString *const kPMActivityTypeJoined     = @"joined";
 
 #pragma mark - User Class
 // Field keys
-NSString *const kPMUserDisplayNameKey                          = @"displayName";
+NSString *const kPMUserDisplayNameKey                          = @"username";
 NSString *const kPAPUserFacebookIDKey                           = @"facebookId";
 NSString *const kPAPUserPhotoIDKey                              = @"photoId";
 NSString *const kPMUserProfilePicSmallKey                      = @"profilePictureSmall";

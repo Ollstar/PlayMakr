@@ -84,7 +84,6 @@
     // Use Reachability to monitor connectivity
     [self monitorReachability];
 
-    
     self.welcomeViewController = [[PMRWelcomeViewController alloc] init];
     
     self.navController = [[UINavigationController alloc] initWithRootViewController:self.welcomeViewController];
@@ -177,7 +176,21 @@
     }
     
 }
-
+- (void)signUpViewController:(PFSignUpViewController *)signUpController didLogInUser:(PFUser *)user {
+    if (![self shouldProceedToMainInterface:user]) {
+        
+    }
+    // Subscribe to private push channel
+    if (user) {
+        NSString *privateChannelName = [NSString stringWithFormat:@"user_%@", [user objectId]];
+        [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:kPMRInstallationUserKey];
+        [[PFInstallation currentInstallation] addUniqueObject:privateChannelName forKey:kPMRInstallationChannelsKey];
+        [[PFInstallation currentInstallation] saveEventually];
+        [user setObject:privateChannelName forKey:kPMUserPrivateChannelKey];
+    }
+    
+    
+}
 
 #pragma mark - NSURLConnectionDataDelegate
 
@@ -204,14 +217,39 @@
                               | PFLogInFieldsSignUpButton
                               | PFLogInFieldsPasswordForgotten
                               );
-    logInController.delegate = self;
-    logInController.signUpController.delegate = self;
+    UIView *blankRect=[[UIView alloc] initWithFrame:CGRectMake(0,
+                                                               0,
+                                                               logInController.logInView.logo.frame.size.width,
+                                                               logInController.logInView.logo.frame.size.height)];
+    [blankRect setBackgroundColor:logInController.logInView.backgroundColor];
+    [logInController.logInView.logo addSubview:blankRect];
+    UIImageView *newLogo=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"images.png"]];
+    [newLogo setContentMode:UIViewContentModeScaleAspectFill];
+    [newLogo setFrame:CGRectMake(0,-50,logInController.logInView.logo.frame.size.width,logInController.logInView.logo.frame.size.height)];
+    [logInController.logInView.logo addSubview:newLogo];
+    UIImageView *newLogo2=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"images.png"]];
+    [newLogo2 setContentMode:UIViewContentModeScaleAspectFill];
+    [newLogo2 setFrame:CGRectMake(0,-50,logInController.signUpController.signUpView.logo.frame.size.width,logInController.signUpController.signUpView.logo.frame.size.height)];
+    UIView *blankRect2=[[UIView alloc] initWithFrame:CGRectMake(0,
+                                                               0,
+                                                               logInController.signUpController.signUpView.logo.frame.size.width,
+                                                               logInController.signUpController.signUpView.logo.frame.size.height)];
+    logInController.logInView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background1"]];
+    logInController.signUpController.signUpView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background1"]];
+    [logInController.signUpController.signUpView.logo addSubview:blankRect2];
+    [logInController.signUpController.signUpView.logo addSubview:newLogo2];
+
+
+    logInController.delegate = self.welcomeViewController;
+    logInController.signUpController.delegate = self.welcomeViewController;
     [self.welcomeViewController presentViewController:logInController animated:animated completion:nil];
 
 }
 
 
 - (void)presentLoginViewController {
+//    [self.welcomeViewController dismissViewControllerAnimated:NO completion:nil];
+
     [self presentLoginViewControllerAnimated:NO];
 }
 
@@ -276,19 +314,19 @@
     // Unsubscribe from push notifications
     [[PFInstallation currentInstallation] removeObjectForKey:kPMRInstallationUserKey];
     [[PFInstallation currentInstallation] saveEventually];
-    [[PFInstallation currentInstallation] removeObject:[[PFUser currentUser] objectForKey:kPMUserPrivateChannelKey] forKey:kPMRInstallationChannelsKey];
-    [[PFInstallation currentInstallation] saveEventually];
+//    [[PFInstallation currentInstallation] removeObject:[[PFUser currentUser] objectForKey:kPMUserPrivateChannelKey] forKey:kPMRInstallationChannelsKey];
+//    [[PFInstallation currentInstallation] saveEventually];
     
     // Log out
     [PFUser logOut];
     
     // clear out cached data, view controllers, etc
     [self.navController popToRootViewControllerAnimated:NO];
-    
-    [self presentLoginViewController];
+
     
     self.homeViewController = nil;
     self.activityViewController = nil;
+    [self presentLoginViewController];
 }
 
 
