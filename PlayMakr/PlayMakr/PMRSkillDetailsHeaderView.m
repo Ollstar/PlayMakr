@@ -179,11 +179,11 @@ static TTTTimeIntervalFormatter *timeFormatter;
         [image removeFromSuperview];
     }
 
-    [endorseButton setTitle:[NSString stringWithFormat:@"%d", self.endorseUsers.count] forState:UIControlStateNormal];
+    [endorseButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.endorseUsers.count] forState:UIControlStateNormal];
 
     self.currentEndorseAvatars = [[NSMutableArray alloc] initWithCapacity:endorseUsers.count];
     int i;
-    int numOfPics = numLikePics > self.endorseUsers.count ? self.endorseUsers.count : numLikePics;
+    int numOfPics = numLikePics > (int)self.endorseUsers.count ? (int)self.endorseUsers.count : numLikePics;
 
     for (i = 0; i < numOfPics; i++) {
         PMRProfileImageView *profilePic = [[PMRProfileImageView alloc] init];

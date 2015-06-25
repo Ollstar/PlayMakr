@@ -56,8 +56,6 @@ typedef enum {
         }
         case kPAPSettingsFindFriends:
         {
-//            PMRFindFriendsViewController *findFriendsVC = [[PMRFindFriendsViewController alloc] init];
-//            [navController pushViewController:findFriendsVC animated:YES];
             break;
         }
         case kPAPSettingsLogout:

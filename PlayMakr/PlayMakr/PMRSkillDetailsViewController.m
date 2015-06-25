@@ -15,6 +15,7 @@
 #import "PMUtility.h"
 #import "PMCache.h"
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
 enum ActionSheetTags {
     MainActionSheetTag = 0,

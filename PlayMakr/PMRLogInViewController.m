@@ -16,9 +16,12 @@
     
     CGRect textBoundingRect = [text boundingRectWithSize:CGSizeMake( 255.0f, CGFLOAT_MAX)
                                                  options:NSStringDrawingTruncatesLastVisibleLine
-                                              attributes:@{NSFontAttributeName:@"HelveticaNeue-Medium"}
+                                              attributes:@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Medium" size:17.0]}
                                                  context:nil];
-    UILabel *textLabel = [[UILabel alloc] initWithFrame:textBoundingRect];
+    CGSize textBoundingSize = textBoundingRect.size;
+    CGFloat textBoundingWidth = ceilf(textBoundingSize.width);
+    CGFloat textBoundingHeight = ceilf(textBoundingSize.height);
+    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake( ([UIScreen mainScreen].bounds.size.width - textBoundingWidth)/2.0f, 160.0f, textBoundingWidth, textBoundingHeight)];
     [textLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:18.0f]];
     [textLabel setLineBreakMode:NSLineBreakByWordWrapping];
     [textLabel setNumberOfLines:0];

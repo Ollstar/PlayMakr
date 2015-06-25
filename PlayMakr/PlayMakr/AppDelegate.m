@@ -37,6 +37,7 @@
 
 
 - (void)setupAppearance;
+- (BOOL)shouldProceedToMainInterface:(PFUser *)user;
 - (BOOL)handleActionURL:(NSURL *)url;
 @end
 
@@ -163,7 +164,9 @@
 #pragma mark - PFLoginViewController
 
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
-    
+    if (![self shouldProceedToMainInterface:user]) {
+
+    }
     // Subscribe to private push channel
     if (user) {
         NSString *privateChannelName = [NSString stringWithFormat:@"user_%@", [user objectId]];
@@ -172,6 +175,7 @@
         [[PFInstallation currentInstallation] saveEventually];
         [user setObject:privateChannelName forKey:kPMUserPrivateChannelKey];
     }
+    
 }
 
 
@@ -194,7 +198,7 @@
 }
 
 - (void)presentLoginViewControllerAnimated:(BOOL)animated {
-    PMRLogInViewController *logInController = [[PMRLogInViewController alloc] init];
+    PFLogInViewController *logInController = [[PFLogInViewController alloc] init];
     logInController.fields = (PFLogInFieldsUsernameAndPassword
                               | PFLogInFieldsLogInButton
                               | PFLogInFieldsSignUpButton
@@ -202,13 +206,13 @@
                               );
     logInController.delegate = self;
     logInController.signUpController.delegate = self;
-    [self.welcomeViewController presentViewController:logInController animated:NO completion:nil];
+    [self.welcomeViewController presentViewController:logInController animated:animated completion:nil];
 
 }
 
 
 - (void)presentLoginViewController {
-    [self presentLoginViewControllerAnimated:YES];
+    [self presentLoginViewControllerAnimated:NO];
 }
 
 - (void)presentTabBarController {
@@ -271,6 +275,7 @@
     
     // Unsubscribe from push notifications
     [[PFInstallation currentInstallation] removeObjectForKey:kPMRInstallationUserKey];
+    [[PFInstallation currentInstallation] saveEventually];
     [[PFInstallation currentInstallation] removeObject:[[PFUser currentUser] objectForKey:kPMUserPrivateChannelKey] forKey:kPMRInstallationChannelsKey];
     [[PFInstallation currentInstallation] saveEventually];
     
@@ -389,7 +394,16 @@
 }
 
 
+- (BOOL)shouldProceedToMainInterface:(PFUser *)user {
+    if ([PFUser currentUser]) {
+        [self presentTabBarController];
 
+        [self.navController dismissViewControllerAnimated:YES completion:nil];
+        return YES;
+    }
+    
+    return NO;
+}
 
 - (BOOL)handleActionURL:(NSURL *)url {
     if ([[url host] isEqualToString:kPAPLaunchURLHostTakePicture]) {
