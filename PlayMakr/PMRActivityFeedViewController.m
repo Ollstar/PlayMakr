@@ -6,19 +6,23 @@
 //
 
 #import "PMRActivityFeedViewController.h"
-#import "PAPSettingsActionSheetDelegate.h"
+#import "PMRSettingsActionSheetDelegate.h"
 #import "PMRActivityCell.h"
 #import "PMRAccountViewController.h"
-#import "PAPPhotoDetailsViewController.h"
+#import "PMRSkillDetailsViewController.h"
 #import "PMRBaseTextCell.h"
 #import "PMRLoadMoreCell.h"
 #import "PMRSettingsButtonItem.h"
-#import "PAPFindFriendsViewController.h"
-#import "MBProgressHUD.h"
+//#import "PMRFindFriendsViewController.h"
+#import "PMCache.h"
+#import "PMUtility.h"
+#import "PMConstants.h"
+#import "AppDelegate.h"
+//#import "MBProgressHUD.h"
 
 @interface PMRActivityFeedViewController ()
 
-@property (nonatomic, strong) PAPSettingsActionSheetDelegate *settingsActionSheetDelegate;
+@property (nonatomic, strong) PMRSettingsActionSheetDelegate *settingsActionSheetDelegate;
 @property (nonatomic, strong) NSDate *lastRefresh;
 @property (nonatomic, strong) UIView *blankTimelineView;
 @end
@@ -37,14 +41,14 @@ static NSString *const kPAPActivityTypeJoinedString = @"joined Anypic";
 #pragma mark - Initialization
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:PAPAppDelegateApplicationDidReceiveRemoteNotification object:nil];    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:PMAppDelegateApplicationDidReceiveRemoteNotification object:nil];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
         // The className to query on
-        self.className = kPAPActivityClassKey;
+        self.parseClassName = kPMActivityClassKey;
         
         // Whether the built-in pull-to-refresh is enabled
         self.pullToRefreshEnabled = YES;
@@ -73,9 +77,9 @@ static NSString *const kPAPActivityTypeJoinedString = @"joined Anypic";
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LogoNavigationBar.png"]];
 
     // Add Settings button
-    self.navigationItem.rightBarButtonItem = [[PAPSettingsButtonItem alloc] initWithTarget:self action:@selector(settingsButtonAction:)];
+    self.navigationItem.rightBarButtonItem = [[PMRSettingsButtonItem alloc] initWithTarget:self action:@selector(settingsButtonAction:)];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidReceiveRemoteNotification:) name:PAPAppDelegateApplicationDidReceiveRemoteNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidReceiveRemoteNotification:) name:PMAppDelegateApplicationDidReceiveRemoteNotification object:nil];
     
     self.blankTimelineView = [[UIView alloc] initWithFrame:self.tableView.bounds];
     
@@ -85,7 +89,7 @@ static NSString *const kPAPActivityTypeJoinedString = @"joined Anypic";
     [button addTarget:self action:@selector(inviteFriendsButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.blankTimelineView addSubview:button];
 
-    lastRefresh = [[NSUserDefaults standardUserDefaults] objectForKey:kPAPUserDefaultsActivityFeedViewControllerLastRefreshKey];
+    lastRefresh = [[NSUserDefaults standardUserDefaults] objectForKey:kPMRUserDefaultsActivityFeedViewControllerLastRefreshKey];
 }
 
 
@@ -94,12 +98,12 @@ static NSString *const kPAPActivityTypeJoinedString = @"joined Anypic";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < self.objects.count) {
         PFObject *object = [self.objects objectAtIndex:indexPath.row];
-        NSString *activityString = [PMRActivityFeedViewController stringForActivityType:(NSString*)[object objectForKey:kPAPActivityTypeKey]];
-        PFUser *user = (PFUser*)[object objectForKey:kPAPActivityFromUserKey];
+        NSString *activityString = [PMRActivityFeedViewController stringForActivityType:(NSString*)[object objectForKey:kPMActivityTypeKey]];
+        PFUser *user = (PFUser*)[object objectForKey:kPMActivityFromUserKey];
         NSString *nameString = @"";
 
         if (user) {
-            nameString = [user objectForKey:kPAPUserDisplayNameKey];
+            nameString = [user objectForKey:kPMUserDisplayNameKey];
         }
         
         return [PMRActivityCell heightForCellWithName:nameString contentString:activityString];
@@ -112,12 +116,12 @@ static NSString *const kPAPActivityTypeJoinedString = @"joined Anypic";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row < self.objects.count) {
         PFObject *activity = [self.objects objectAtIndex:indexPath.row];
-        if ([activity objectForKey:kPAPActivityPhotoKey]) {
-            PAPPhotoDetailsViewController *detailViewController = [[PAPPhotoDetailsViewController alloc] initWithPhoto:[activity objectForKey:kPAPActivityPhotoKey]];
+        if ([activity objectForKey:kPMActivitySkillKey]) {
+            PMRSkillDetailsViewController *detailViewController = [[PMRSkillDetailsViewController alloc] initWithSkill:[activity objectForKey:kPMActivitySkillKey]];
             [self.navigationController pushViewController:detailViewController animated:YES];
-        } else if ([activity objectForKey:kPAPActivityFromUserKey]) {
+        } else if ([activity objectForKey:kPMActivityFromUserKey]) {
             PMRAccountViewController *detailViewController = [[PMRAccountViewController alloc] initWithStyle:UITableViewStylePlain];
-            [detailViewController setUser:[activity objectForKey:kPAPActivityFromUserKey]];
+            [detailViewController setUser:[activity objectForKey:kPMActivityFromUserKey]];
             [self.navigationController pushViewController:detailViewController animated:YES];
         }
     } else if (self.paginationEnabled) {
@@ -131,17 +135,17 @@ static NSString *const kPAPActivityTypeJoinedString = @"joined Anypic";
 - (PFQuery *)queryForTable {
     
     if (![PFUser currentUser]) {
-        PFQuery *query = [PFQuery queryWithClassName:self.className];
+        PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
         [query setLimit:0];
         return query;
     }
 
-    PFQuery *query = [PFQuery queryWithClassName:self.className];
-    [query whereKey:kPAPActivityToUserKey equalTo:[PFUser currentUser]];
-    [query whereKey:kPAPActivityFromUserKey notEqualTo:[PFUser currentUser]];
-    [query whereKeyExists:kPAPActivityFromUserKey];
-    [query includeKey:kPAPActivityFromUserKey];
-    [query includeKey:kPAPActivityPhotoKey];
+    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    [query whereKey:kPMActivityToUserKey equalTo:[PFUser currentUser]];
+    [query whereKey:kPMActivityFromUserKey notEqualTo:[PFUser currentUser]];
+    [query whereKeyExists:kPMActivityFromUserKey];
+    [query includeKey:kPMActivityFromUserKey];
+    [query includeKey:kPMActivitySkillKey];
     [query orderByDescending:@"createdAt"];
 
     [query setCachePolicy:kPFCachePolicyNetworkOnly];
@@ -163,10 +167,10 @@ static NSString *const kPAPActivityTypeJoinedString = @"joined Anypic";
     [super objectsDidLoad:error];
     
     lastRefresh = [NSDate date];
-    [[NSUserDefaults standardUserDefaults] setObject:lastRefresh forKey:kPAPUserDefaultsActivityFeedViewControllerLastRefreshKey];
+    [[NSUserDefaults standardUserDefaults] setObject:lastRefresh forKey:kPMRUserDefaultsActivityFeedViewControllerLastRefreshKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+//    [MBProgressHUD hideHUDForView:self.view animated:YES];
     
     if (self.objects.count == 0 && ![[self queryForTable] hasCachedResult]) {
         self.tableView.scrollEnabled = NO;
@@ -186,13 +190,13 @@ static NSString *const kPAPActivityTypeJoinedString = @"joined Anypic";
         
         NSUInteger unreadCount = 0;
         for (PFObject *activity in self.objects) {
-            if ([lastRefresh compare:[activity createdAt]] == NSOrderedAscending && ![[activity objectForKey:kPAPActivityTypeKey] isEqualToString:kPAPActivityTypeJoined]) {
+            if ([lastRefresh compare:[activity createdAt]] == NSOrderedAscending && ![[activity objectForKey:kPMActivityTypeKey] isEqualToString:kPMActivityTypeJoined]) {
                 unreadCount++;
             }
         }
         
         if (unreadCount > 0) {
-            self.navigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",unreadCount];
+            self.navigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%lu",(unsigned long)unreadCount];
         } else {
             self.navigationController.tabBarItem.badgeValue = nil;
         }
@@ -240,11 +244,11 @@ static NSString *const kPAPActivityTypeJoinedString = @"joined Anypic";
 
 - (void)cell:(PMRActivityCell *)cellView didTapActivityButton:(PFObject *)activity {    
     // Get image associated with the activity
-    PFObject *photo = [activity objectForKey:kPAPActivityPhotoKey];
+    PFObject *skill = [activity objectForKey:kPMActivitySkillKey];
     
     // Push single photo view controller
-    PAPPhotoDetailsViewController *photoViewController = [[PAPPhotoDetailsViewController alloc] initWithPhoto:photo];
-    [self.navigationController pushViewController:photoViewController animated:YES];
+    PMRSkillDetailsViewController *skillViewController = [[PMRSkillDetailsViewController alloc] initWithSkill:skill];
+    [self.navigationController pushViewController:skillViewController animated:YES];
 }
 
 - (void)cell:(PMRBaseTextCell *)cellView didTapUserButton:(PFUser *)user {    
@@ -258,13 +262,13 @@ static NSString *const kPAPActivityTypeJoinedString = @"joined Anypic";
 #pragma mark - PAPActivityFeedViewController
 
 + (NSString *)stringForActivityType:(NSString *)activityType {
-    if ([activityType isEqualToString:kPAPActivityTypeLike]) {
+    if ([activityType isEqualToString:kPMActivityTypeEndorse]) {
         return kPAPActivityTypeLikeString;
-    } else if ([activityType isEqualToString:kPAPActivityTypeFollow]) {
+    } else if ([activityType isEqualToString:kPMActivityTypeFollow]) {
         return kPAPActivityTypeFollowString;
-    } else if ([activityType isEqualToString:kPAPActivityTypeComment]) {
+    } else if ([activityType isEqualToString:kPMActivityTypeComment]) {
         return kPAPActivityTypeCommentString;
-    } else if ([activityType isEqualToString:kPAPActivityTypeJoined]) {
+    } else if ([activityType isEqualToString:kPMActivityTypeJoined]) {
         return kPAPActivityTypeJoinedString;
     } else {
         return nil;
@@ -276,15 +280,15 @@ static NSString *const kPAPActivityTypeJoinedString = @"joined Anypic";
 
 
 - (void)settingsButtonAction:(id)sender {
-    settingsActionSheetDelegate = [[PAPSettingsActionSheetDelegate alloc] initWithNavigationController:self.navigationController];
+    settingsActionSheetDelegate = [[PMRSettingsActionSheetDelegate alloc] initWithNavigationController:self.navigationController];
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:settingsActionSheetDelegate cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"My Profile", @"Find Friends", @"Log Out", nil];
     
     [actionSheet showFromTabBar:self.tabBarController.tabBar];
 }
 
 - (void)inviteFriendsButtonAction:(id)sender {
-    PAPFindFriendsViewController *detailViewController = [[PAPFindFriendsViewController alloc] init];
-    [self.navigationController pushViewController:detailViewController animated:YES];
+//    PMRFindFriendsViewController *detailViewController = [[PMRFindFriendsViewController alloc] init];
+//    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 - (void)applicationDidReceiveRemoteNotification:(NSNotification *)note {

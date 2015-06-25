@@ -322,7 +322,7 @@
 }
 
 - (void)monitorReachability {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:ReachabilityChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     
     self.hostReach = [Reachability reachabilityWithHostName: @"api.parse.com"];
     [self.hostReach startNotifier];

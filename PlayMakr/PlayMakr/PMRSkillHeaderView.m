@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Oliver Andrews. All rights reserved.
 //
 
-#import "PMSkillHeaderView.h"
+#import "PMRSkillHeaderView.h"
 #import "PMRProfileImageView.h"
 #import "TTTTimeIntervalFormatter.h"
 #import "PMConstants.h"
@@ -58,7 +58,7 @@
         [self.containerView addSubview:self.avatarImageView];
         
         
-        if (self.buttons & PAPPhotoHeaderButtonsComment) {
+        if (self.buttons & PMRSkillHeaderButtonsComment) {
             // comments button
             commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
             [containerView addSubview:self.commentButton];
@@ -76,7 +76,7 @@
             [self.commentButton setSelected:NO];
         }
         
-        if (self.buttons & PMSkillHeaderButtonsEndorse) {
+        if (self.buttons & PMRSkillHeaderButtonsEndorse) {
             // endorse button
             endorseButton = [UIButton buttonWithType:UIButtonTypeCustom];
             [containerView addSubview:self.endorseButton];
@@ -99,7 +99,7 @@
             [self.endorseButton setSelected:NO];
         }
         
-        if (self.buttons & PMSkillHeaderButtonsUser) {
+        if (self.buttons & PMRSkillHeaderButtonsUser) {
             // This is the user's display name, on a button so that we can tap on it
             self.userButton = [UIButton buttonWithType:UIButtonTypeCustom];
             [containerView addSubview:self.userButton];
@@ -151,16 +151,16 @@
     
     CGFloat constrainWidth = containerView.bounds.size.width;
     
-    if (self.buttons & PMSkillHeaderButtonsUser) {
+    if (self.buttons & PMRSkillHeaderButtonsUser) {
         [self.userButton addTarget:self action:@selector(didTapUserButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     
-    if (self.buttons & PAPPhotoHeaderButtonsComment) {
+    if (self.buttons & PMRSkillHeaderButtonsComment) {
         constrainWidth = self.commentButton.frame.origin.x;
         [self.commentButton addTarget:self action:@selector(didTapCommentOnSkillButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     
-    if (self.buttons & PMSkillHeaderButtonsEndorse) {
+    if (self.buttons & PMRSkillHeaderButtonsEndorse) {
         constrainWidth = self.endorseButton.frame.origin.x;
         [self.endorseButton addTarget:self action:@selector(didTapEndorseSkillButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -207,7 +207,7 @@
 #pragma mark - ()
 
 + (void)validateButtons:(PMSkillHeaderButtons)buttons {
-    if (buttons == PMSkillHeaderButtonsNone) {
+    if (buttons == PMRSkillHeaderButtonsNone) {
         [NSException raise:NSInvalidArgumentException format:@"Buttons must be set before initializing PMSkillHeaderView."];
     }
 }

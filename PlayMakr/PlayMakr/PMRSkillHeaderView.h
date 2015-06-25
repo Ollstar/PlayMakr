@@ -67,7 +67,7 @@ typedef enum {
  The protocol defines methods a delegate of a PMSkillHeaderView should implement.
  All methods of the protocol are optional.
  */
-@protocol PMSkillHeaderViewDelegate <NSObject>
+@protocol PMRSkillHeaderViewDelegate <NSObject>
 @optional
 
 /*!

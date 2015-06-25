@@ -8,7 +8,7 @@
 #import "PMRHomeViewController.h"
 #import "PMRSettingsActionSheetDelegate.h"
 #import "PMRSettingsButtonItem.h"
-#import "PMRFindFriendsViewController.h"
+//#import "PMRFindFriendsViewController.h"
 
 @interface PMRHomeViewController ()
 @property (nonatomic, strong) PMRSettingsActionSheetDelegate *settingsActionSheetDelegate;
@@ -73,8 +73,8 @@
 }
 
 
-- (void)inviteFriendsButtonAction:(id)sender {
-    PMRFindFriendsViewController *detailViewController = [[PMRFindFriendsViewController alloc] init];
-    [self.navigationController pushViewController:detailViewController animated:YES];
-}
+//- (void)inviteFriendsButtonAction:(id)sender {
+//    PMRFindFriendsViewController *detailViewController = [[PMRFindFriendsViewController alloc] init];
+//    [self.navigationController pushViewController:detailViewController animated:YES];
+//}
 @end

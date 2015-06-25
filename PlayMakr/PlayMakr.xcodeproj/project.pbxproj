@@ -32,12 +32,11 @@
 		A72A3EFA1B3A8939000C6F78 /* PMRSkillTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72A3EF51B3A8939000C6F78 /* PMRSkillTimelineViewController.m */; };
 		A72A3EFB1B3A8939000C6F78 /* PMRHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72A3EF71B3A8939000C6F78 /* PMRHomeViewController.m */; };
 		A72A3EFC1B3A8939000C6F78 /* PMRAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72A3EF91B3A8939000C6F78 /* PMRAccountViewController.m */; };
-		A72A3EFF1B3A8941000C6F78 /* PAPEditPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72A3EFE1B3A8941000C6F78 /* PAPEditPhotoViewController.m */; };
 		A72A3F021B3A8949000C6F78 /* PMRActivityFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72A3F011B3A8949000C6F78 /* PMRActivityFeedViewController.m */; };
 		A72A3F051B3A898E000C6F78 /* PMRTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72A3F041B3A898E000C6F78 /* PMRTabBarController.m */; };
-		A7342F641B3B2CA500D7F4A4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A7342F631B3B2CA500D7F4A4 /* Reachability.m */; };
 		A7342F691B3B555600D7F4A4 /* PMRFindFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7342F661B3B555600D7F4A4 /* PMRFindFriendsViewController.m */; };
 		A7342F6A1B3B555600D7F4A4 /* PMRSettingsActionSheetDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7342F681B3B555600D7F4A4 /* PMRSettingsActionSheetDelegate.m */; };
+		A7342F6D1B3B77DD00D7F4A4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A7342F6C1B3B77DD00D7F4A4 /* Reachability.m */; };
 		A73927611B35C651007F5461 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A73927601B35C651007F5461 /* main.m */; };
 		A73927641B35C651007F5461 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A73927631B35C651007F5461 /* AppDelegate.m */; };
 		A739276D1B35C651007F5461 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A739276B1B35C651007F5461 /* Main.storyboard */; };
@@ -127,18 +126,16 @@
 		A72A3EF71B3A8939000C6F78 /* PMRHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRHomeViewController.m; sourceTree = "<group>"; };
 		A72A3EF81B3A8939000C6F78 /* PMRAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRAccountViewController.h; sourceTree = "<group>"; };
 		A72A3EF91B3A8939000C6F78 /* PMRAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRAccountViewController.m; sourceTree = "<group>"; };
-		A72A3EFD1B3A8941000C6F78 /* PAPEditPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAPEditPhotoViewController.h; sourceTree = "<group>"; };
-		A72A3EFE1B3A8941000C6F78 /* PAPEditPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAPEditPhotoViewController.m; sourceTree = "<group>"; };
 		A72A3F001B3A8949000C6F78 /* PMRActivityFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRActivityFeedViewController.h; sourceTree = "<group>"; };
 		A72A3F011B3A8949000C6F78 /* PMRActivityFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRActivityFeedViewController.m; sourceTree = "<group>"; };
 		A72A3F031B3A898E000C6F78 /* PMRTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRTabBarController.h; sourceTree = "<group>"; };
 		A72A3F041B3A898E000C6F78 /* PMRTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRTabBarController.m; sourceTree = "<group>"; };
-		A7342F621B3B2CA500D7F4A4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		A7342F631B3B2CA500D7F4A4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		A7342F651B3B555600D7F4A4 /* PMRFindFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRFindFriendsViewController.h; sourceTree = "<group>"; };
 		A7342F661B3B555600D7F4A4 /* PMRFindFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRFindFriendsViewController.m; sourceTree = "<group>"; };
 		A7342F671B3B555600D7F4A4 /* PMRSettingsActionSheetDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRSettingsActionSheetDelegate.h; sourceTree = "<group>"; };
 		A7342F681B3B555600D7F4A4 /* PMRSettingsActionSheetDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRSettingsActionSheetDelegate.m; sourceTree = "<group>"; };
+		A7342F6B1B3B77DD00D7F4A4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		A7342F6C1B3B77DD00D7F4A4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		A739275B1B35C651007F5461 /* PlayMakr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayMakr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A739275F1B35C651007F5461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A73927601B35C651007F5461 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -358,8 +355,6 @@
 		A72A3EEA1B3A883E000C6F78 /* Take Photo */ = {
 			isa = PBXGroup;
 			children = (
-				A72A3EFD1B3A8941000C6F78 /* PAPEditPhotoViewController.h */,
-				A72A3EFE1B3A8941000C6F78 /* PAPEditPhotoViewController.m */,
 			);
 			name = "Take Photo";
 			sourceTree = "<group>";
@@ -400,8 +395,8 @@
 		A7342F611B3B2C9400D7F4A4 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
-				A7342F621B3B2CA500D7F4A4 /* Reachability.h */,
-				A7342F631B3B2CA500D7F4A4 /* Reachability.m */,
+				A7342F6B1B3B77DD00D7F4A4 /* Reachability.h */,
+				A7342F6C1B3B77DD00D7F4A4 /* Reachability.m */,
 			);
 			name = Reachability;
 			sourceTree = "<group>";
@@ -622,13 +617,11 @@
 				A72A3ECF1B3A85D4000C6F78 /* PMRSkillDetailsViewController.m in Sources */,
 				A72A3EC81B39DC1E000C6F78 /* UIImage+RoundedCornerAdditions.m in Sources */,
 				A73927641B35C651007F5461 /* AppDelegate.m in Sources */,
-				A72A3EFF1B3A8941000C6F78 /* PAPEditPhotoViewController.m in Sources */,
 				A72A3ECC1B39DEF7000C6F78 /* TTTTimeIntervalFormatter.m in Sources */,
 				A748FFEF1B37C6E3005005EE /* SearchResultCell.m in Sources */,
 				A73927611B35C651007F5461 /* main.m in Sources */,
 				A72A3EE21B3A87B1000C6F78 /* PMRPhotoCell.m in Sources */,
 				A72A3EFC1B3A8939000C6F78 /* PMRAccountViewController.m in Sources */,
-				A7342F641B3B2CA500D7F4A4 /* Reachability.m in Sources */,
 				A72A3EB71B39D88A000C6F78 /* PMRImageView.m in Sources */,
 				A72A3EE61B3A8807000C6F78 /* PMRSettingsButtonItem.m in Sources */,
 				A72A3EF21B3A8929000C6F78 /* PMRWelcomeViewController.m in Sources */,
@@ -638,6 +631,7 @@
 				A72A3EBD1B39DA96000C6F78 /* PMRSkillDetailsHeaderView.m in Sources */,
 				A72A3EB81B39D88A000C6F78 /* PMRProfileImageView.m in Sources */,
 				A73927BA1B35E2E4007F5461 /* LoginViewController.m in Sources */,
+				A7342F6D1B3B77DD00D7F4A4 /* Reachability.m in Sources */,
 				A7342F6A1B3B555600D7F4A4 /* PMRSettingsActionSheetDelegate.m in Sources */,
 				A72A3EBE1B39DA96000C6F78 /* PMRSkillDetailsFooterView.m in Sources */,
 				A748FFF71B37F058005005EE /* ProfileViewController.m in Sources */,

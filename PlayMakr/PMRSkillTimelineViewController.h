@@ -8,7 +8,7 @@
 #import "PMRSkillHeaderView.h"
 #import <ParseUI/ParseUI.h>
 
-@interface PMRSkillTimelineViewController : PFQueryTableViewController <PMSkillHeaderViewDelegate>
+@interface PMRSkillTimelineViewController : PFQueryTableViewController <PMRSkillHeaderViewDelegate>
 
 - (PMRSkillHeaderView *)dequeueReusableSectionHeaderView;
 

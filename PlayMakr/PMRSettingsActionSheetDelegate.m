@@ -6,9 +6,10 @@
 //
 
 #import "PMRSettingsActionSheetDelegate.h"
-#import "PAPFindFriendsViewController.h"
-#import "PAPAccountViewController.h"
+//#import "PMRFindFriendsViewController.h"
+#import "PMRAccountViewController.h"
 #import "AppDelegate.h"
+#import "PMConstants.h"
 
 // ActionSheet button indexes
 typedef enum {
@@ -48,15 +49,15 @@ typedef enum {
     switch ((kPAPSettingsActionSheetButtons)buttonIndex) {
         case kPAPSettingsProfile:
         {
-            PAPAccountViewController *accountViewController = [[PAPAccountViewController alloc] initWithStyle:UITableViewStylePlain];
+            PMRAccountViewController *accountViewController = [[PMRAccountViewController alloc] initWithStyle:UITableViewStylePlain];
             [accountViewController setUser:[PFUser currentUser]];
             [navController pushViewController:accountViewController animated:YES];
             break;
         }
         case kPAPSettingsFindFriends:
         {
-            PAPFindFriendsViewController *findFriendsVC = [[PAPFindFriendsViewController alloc] init];
-            [navController pushViewController:findFriendsVC animated:YES];
+//            PMRFindFriendsViewController *findFriendsVC = [[PMRFindFriendsViewController alloc] init];
+//            [navController pushViewController:findFriendsVC animated:YES];
             break;
         }
         case kPAPSettingsLogout:

@@ -6,6 +6,7 @@
 //
 
 #import "PMRTabBarController.h"
+#import "PMUtility.h"
 
 @interface PMRTabBarController ()
 @property (nonatomic,strong) UINavigationController *navController;
@@ -24,7 +25,7 @@
     [[self tabBar] setSelectionIndicatorImage:[UIImage imageNamed:@"BackgroundTabBarItemSelected.png"]];
     
     self.navController = [[UINavigationController alloc] init];
-    [PAPUtility addBottomDropShadowToNavigationBarForNavigationController:self.navController];
+    [PMUtility addBottomDropShadowToNavigationBarForNavigationController:self.navController];
 }
 
 
@@ -50,21 +51,23 @@
 #pragma mark - UIImagePickerDelegate
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [self dismissModalViewControllerAnimated:NO];
+    [self dismissViewControllerAnimated:NO
+                             completion:nil];
     
-    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-     
-    PAPEditPhotoViewController *viewController = [[PAPEditPhotoViewController alloc] initWithImage:image];
-    [viewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-    
-    [self.navController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-    [self.navController pushViewController:viewController animated:NO];
-    
-    [self presentModalViewController:self.navController animated:YES];
+//    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+//     
+//    PAPEditPhotoViewController *viewController = [[PAPEditPhotoViewController alloc] initWithImage:image];
+//    [viewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+//    
+//    [self.navController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+//    [self.navController pushViewController:viewController animated:NO];
+//    
+//    [self presentModalViewController:self.navController animated:YES];
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -107,34 +110,34 @@
 
 - (BOOL)shouldStartCameraController {
     
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO) {
-        return NO;
-    }
-    
-    UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
-    
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]
-        && [[UIImagePickerController availableMediaTypesForSourceType:
-             UIImagePickerControllerSourceTypeCamera] containsObject:(NSString *)kUTTypeImage]) {
-        
-        cameraUI.mediaTypes = [NSArray arrayWithObject:(NSString *) kUTTypeImage];
-        cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
-        
-        if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear]) {
-            cameraUI.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-        } else if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]) {
-            cameraUI.cameraDevice = UIImagePickerControllerCameraDeviceFront;
-        }
-        
-    } else {
-        return NO;
-    }
-    
-    cameraUI.allowsEditing = YES;
-    cameraUI.showsCameraControls = YES;
-    cameraUI.delegate = self;
-    
-    [self presentModalViewController:cameraUI animated:YES];
+//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO) {
+//        return NO;
+//    }
+//    
+//    UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
+//    
+//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]
+//        && [[UIImagePickerController availableMediaTypesForSourceType:
+//             UIImagePickerControllerSourceTypeCamera] containsObject:(NSString *)kUTTypeImage]) {
+//        
+//        cameraUI.mediaTypes = [NSArray arrayWithObject:(NSString *) kUTTypeImage];
+//        cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        
+//        if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear]) {
+//            cameraUI.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+//        } else if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]) {
+//            cameraUI.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+//        }
+//        
+//    } else {
+//        return NO;
+//    }
+//    
+//    cameraUI.allowsEditing = YES;
+//    cameraUI.showsCameraControls = YES;
+//    cameraUI.delegate = self;
+//    
+//    [self presentModalViewController:cameraUI animated:YES];
     
     return YES;
 }
@@ -145,28 +148,28 @@
          && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum] == NO)) {
         return NO;
     }
-    
-    UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]
-        && [[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary] containsObject:(NSString *)kUTTypeImage]) {
-        
-        cameraUI.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        cameraUI.mediaTypes = [NSArray arrayWithObject:(NSString *) kUTTypeImage];
-        
-    } else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]
-               && [[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum] containsObject:(NSString *)kUTTypeImage]) {
-        
-        cameraUI.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-        cameraUI.mediaTypes = [NSArray arrayWithObject:(NSString *) kUTTypeImage];
-        
-    } else {
-        return NO;
-    }
-    
-    cameraUI.allowsEditing = YES;
-    cameraUI.delegate = self;
-    
-    [self presentModalViewController:cameraUI animated:YES];
+//    
+//    UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
+//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]
+//        && [[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary] containsObject:(NSString *)kUTTypeImage]) {
+//        
+//        cameraUI.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//        cameraUI.mediaTypes = [NSArray arrayWithObject:(NSString *) kUTTypeImage];
+//        
+//    } else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]
+//               && [[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum] containsObject:(NSString *)kUTTypeImage]) {
+//        
+//        cameraUI.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+//        cameraUI.mediaTypes = [NSArray arrayWithObject:(NSString *) kUTTypeImage];
+//        
+//    } else {
+//        return NO;
+//    }
+//    
+//    cameraUI.allowsEditing = YES;
+//    cameraUI.delegate = self;
+//    
+//    [self presentModalViewController:cameraUI animated:YES];
     
     return YES;
 }

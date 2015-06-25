@@ -9,7 +9,7 @@
 #import "PMRBaseTextCell.h"
 #import <ParseUI/ParseUI.h>
 
-@interface PMRSkillDetailsViewController : PFQueryTableViewController <UITextFieldDelegate, UIActionSheetDelegate, PMRSkillDetailsHeaderViewDelegate, PMRBaseTextCellDelegate>
+@interface PMRSkillDetailsViewController : PFQueryTableViewController <UITextFieldDelegate, UIActionSheetDelegate, PMSkillDetailsHeaderViewDelegate, PMRBaseTextCellDelegate>
 
 @property (nonatomic, strong) PFObject *skill;
 

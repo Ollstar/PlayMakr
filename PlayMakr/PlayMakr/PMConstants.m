@@ -20,15 +20,15 @@ NSString *const kPAPLaunchURLHostTakePicture = @"camera";
 
 #pragma mark - NSNotification
 
-NSString *const PAPAppDelegateApplicationDidReceiveRemoteNotification           = @"Oliver.PlayMakr.appDelegate.applicationDidReceiveRemoteNotification";
-NSString *const PAPUtilityUserFollowingChangedNotification                      = @"Oliver.PlayMakr.utility.userFollowingChanged";
+NSString *const PMAppDelegateApplicationDidReceiveRemoteNotification           = @"Oliver.PlayMakr.appDelegate.applicationDidReceiveRemoteNotification";
+NSString *const PMUtilityUserFollowingChangedNotification                      = @"Oliver.PlayMakr.utility.userFollowingChanged";
 NSString *const PMUtilityUserEndorsedUnendorsedSkillCallbackFinishedNotification     = @"Oliver.PlayMakr.utility.userEndorsedUnendorsedSkillCallbackFinished";
 NSString *const PAPUtilityDidFinishProcessingProfilePictureNotification         = @"Oliver.PlayMakr.utility.didFinishProcessingProfilePictureNotification";
 NSString *const PAPTabBarControllerDidFinishEditingPhotoNotification            = @"Oliver.PlayMakr.tabBarController.didFinishEditingPhoto";
 NSString *const PAPTabBarControllerDidFinishImageFileUploadNotification         = @"com.parse.Anypic.tabBarController.didFinishImageFileUploadNotification";
-NSString *const PAPPhotoDetailsViewControllerUserDeletedPhotoNotification       = @"com.parse.Anypic.photoDetailsViewController.userDeletedPhoto";
+NSString *const PMRSkillDetailsViewControllerUserDeletedSkillNotification       = @"Oliver.PlayMakr.skillDetailsViewController.userDeletedSkill";
 NSString *const PMSkillDetailsViewControllerUserEndorsedUnendorsedSkillNotification  = @"Oliver.PlayMakr.skillDetailsViewController.userEndorsedUnendorsedInDetailsViewNotification";
-NSString *const PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification   = @"com.parse.Anypic.photoDetailsViewController.userCommentedOnPhotoInDetailsViewNotification";
+NSString *const PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification   = @"Oliver.PlayMakr.skillDetailsViewController.userCommentedOnSkillInDetailsViewNotification";
 
 
 #pragma mark - User Info Keys
@@ -38,8 +38,8 @@ NSString *const kPAPEditPhotoViewControllerUserInfoCommentKey = @"comment";
 #pragma mark - Installation Class
 
 // Field keys
-NSString *const kPMInstallationUserKey = @"user";
-NSString *const kPMInstallationChannelsKey = @"channels";
+NSString *const kPMRInstallationUserKey = @"user";
+NSString *const kPMRInstallationChannelsKey = @"channels";
 
 #pragma mark - Activity Class
 // Class key

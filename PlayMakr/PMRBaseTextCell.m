@@ -61,7 +61,7 @@ static TTTTimeIntervalFormatter *timeFormatter;
         mainView = [[UIView alloc] initWithFrame:self.contentView.frame];
         [mainView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundComments.png"]]];
         
-        self.avatarImageView = [[PMProfileImageView alloc] init];
+        self.avatarImageView = [[PMRProfileImageView alloc] init];
         [self.avatarImageView setBackgroundColor:[UIColor clearColor]];
         [self.avatarImageView setOpaque:YES];
         [mainView addSubview:self.avatarImageView];
@@ -278,11 +278,11 @@ static TTTTimeIntervalFormatter *timeFormatter;
 
 /* Since we remove the compile-time check for the delegate conforming to the protocol
  in order to allow inheritance, we add run-time checks. */
-- (id<PAPBaseTextCellDelegate>)delegate {
-    return (id<PAPBaseTextCellDelegate>)delegate;
+- (id<PMRBaseTextCellDelegate>)delegate {
+    return (id<PMRBaseTextCellDelegate>)delegate;
 }
 
-- (void)setDelegate:(id<PAPBaseTextCellDelegate>)aDelegate {
+- (void)setDelegate:(id<PMRBaseTextCellDelegate>)aDelegate {
     if (delegate != aDelegate) {
         delegate = aDelegate;
     }

@@ -5,9 +5,9 @@
 //  Created by Héctor Ramos on 5/15/12.
 //
 
-#import "PAPEditPhotoViewController.h"
+#import <UIKit/UIKit.h>
 
-@protocol PAPTabBarControllerDelegate;
+@protocol PMRTabBarControllerDelegate;
 
 @interface PMRTabBarController : UITabBarController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
 
@@ -15,7 +15,7 @@
 
 @end
 
-@protocol PAPTabBarControllerDelegate <NSObject>
+@protocol PMRTabBarControllerDelegate <NSObject>
 
 - (void)tabBarController:(UITabBarController *)tabBarController cameraButtonTouchUpInsideAction:(UIButton *)button;
 

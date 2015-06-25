@@ -12,6 +12,9 @@
 #import "PMUtility.h"
 #import "PMRLoadMoreCell.h"
 #import "PMConstants.h"
+#import "PMCache.h"
+#import <Parse/Parse.h>
+#import "AppDelegate.h"
 
 @interface PMRSkillTimelineViewController ()
 @property (nonatomic, assign) BOOL shouldReloadOnAppear;
@@ -32,7 +35,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:PMSkillDetailsViewControllerUserEndorsedUnendorsedSkillNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:PMUtilityUserEndorsedUnendorsedSkillCallbackFinishedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:PAPPhotoDetailsViewControllerUserDeletedPhotoNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:PMRSkillDetailsViewControllerUserDeletedSkillNotification object:nil];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -43,7 +46,7 @@
         self.outstandingSectionHeaderQueries = [NSMutableDictionary dictionary];
         
         // The className to query on
-        self.className = kPMSkillClassKey;
+        self.parseClassName = kPMSkillClassKey;
         
         // Whether the built-in pull-to-refresh is enabled
         self.pullToRefreshEnabled = YES;
@@ -74,12 +77,12 @@
     texturedBackgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundLeather.png"]];
     self.tableView.backgroundView = texturedBackgroundView;
         
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidPublishPhoto:) name:PAPTabBarControllerDidFinishEditingPhotoNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userFollowingChanged:) name:PAPUtilityUserFollowingChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidDeletePhoto:) name:PAPPhotoDetailsViewControllerUserDeletedPhotoNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLikeOrUnlikePhoto:) name:PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLikeOrUnlikePhoto:) name:PAPUtilityUserLikedUnlikedPhotoCallbackFinishedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidCommentOnPhoto:) name:PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidPublishSkill:) name:PAPTabBarControllerDidFinishEditingPhotoNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userFollowingChanged:) name:PMUtilityUserFollowingChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidDeleteSkill:) name:PMRSkillDetailsViewControllerUserDeletedSkillNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidEndorseOrUnendorseSkill:) name:PMSkillDetailsViewControllerUserEndorsedUnendorsedSkillNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidEndorseOrUnendorseSkill:) name:PMUtilityUserEndorsedUnendorsedSkillCallbackFinishedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidCommentOnSkill:) name:PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -114,41 +117,41 @@
         return nil;
     }
 
-    PAPPhotoHeaderView *headerView = [self dequeueReusableSectionHeaderView];
+    PMRSkillHeaderView *headerView = [self dequeueReusableSectionHeaderView];
     
     if (!headerView) {
-        headerView = [[PAPPhotoHeaderView alloc] initWithFrame:CGRectMake( 0.0f, 0.0f, self.view.bounds.size.width, 44.0f) buttons:PAPPhotoHeaderButtonsDefault];
+        headerView = [[PMRSkillHeaderView alloc] initWithFrame:CGRectMake( 0.0f, 0.0f, self.view.bounds.size.width, 44.0f) buttons:PMSkillHeaderButtonsDefault];
         headerView.delegate = self;
         [self.reusableSectionHeaderViews addObject:headerView];
     }
     
-    PFObject *photo = [self.objects objectAtIndex:section];
-    [headerView setPhoto:photo];
+    PFObject *skill = [self.objects objectAtIndex:section];
+    [headerView setSkill:skill];
     headerView.tag = section;
-    [headerView.likeButton setTag:section];
+    [headerView.endorseButton setTag:section];
     
-    NSDictionary *attributesForPhoto = [[PAPCache sharedCache] attributesForPhoto:photo];
+    NSDictionary *attributesForSkill = [[PMCache sharedCache] attributesForSkill:skill];
                                         
-    if (attributesForPhoto) {
-        [headerView setLikeStatus:[[PAPCache sharedCache] isPhotoLikedByCurrentUser:photo]];
-        [headerView.likeButton setTitle:[[[PAPCache sharedCache] likeCountForPhoto:photo] description] forState:UIControlStateNormal];
-        [headerView.commentButton setTitle:[[[PAPCache sharedCache] commentCountForPhoto:photo] description] forState:UIControlStateNormal];
+    if (attributesForSkill) {
+        [headerView setEndorseStatus:[[PMCache sharedCache] isSkillEndorsedByCurrentUser:skill]];
+        [headerView.endorseButton setTitle:[[[PMCache sharedCache] endorseCountForSkill:skill] description] forState:UIControlStateNormal];
+//        [headerView.commentButton setTitle:[[[PMCache sharedCache] commentCountForSkill:skill] description] forState:UIControlStateNormal];
         
-        if (headerView.likeButton.alpha < 1.0f || headerView.commentButton.alpha < 1.0f) {
+        if (headerView.endorseButton.alpha < 1.0f || headerView.commentButton.alpha < 1.0f) {
             [UIView animateWithDuration:0.200f animations:^{
-                headerView.likeButton.alpha = 1.0f;
+                headerView.endorseButton.alpha = 1.0f;
                 headerView.commentButton.alpha = 1.0f;
             }];
         }
     } else {
-        headerView.likeButton.alpha = 0.0f;
+        headerView.endorseButton.alpha = 0.0f;
         headerView.commentButton.alpha = 0.0f;
         
         @synchronized(self) {
             // check if we can update the cache
             NSNumber *outstandingSectionHeaderQueryStatus = [self.outstandingSectionHeaderQueries objectForKey:[NSNumber numberWithInt:section]];
             if (!outstandingSectionHeaderQueryStatus) {
-                PFQuery *query = [PAPUtility queryForActivitiesOnPhoto:photo cachePolicy:kPFCachePolicyNetworkOnly];
+                PFQuery *query = [PMUtility queryForActivitiesOnSkill:skill cachePolicy:kPFCachePolicyNetworkOnly];
                 [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                     @synchronized(self) {
                         [self.outstandingSectionHeaderQueries removeObjectForKey:[NSNumber numberWithInt:section]];
@@ -157,38 +160,38 @@
                             return;
                         }
                         
-                        NSMutableArray *likers = [NSMutableArray array];
+                        NSMutableArray *endorsers = [NSMutableArray array];
                         NSMutableArray *commenters = [NSMutableArray array];
                         
-                        BOOL isLikedByCurrentUser = NO;
+                        BOOL isEndorsedByCurrentUser = NO;
                         
                         for (PFObject *activity in objects) {
-                            if ([[activity objectForKey:kPAPActivityTypeKey] isEqualToString:kPAPActivityTypeLike] && [activity objectForKey:kPAPActivityFromUserKey]) {
-                                [likers addObject:[activity objectForKey:kPAPActivityFromUserKey]];
-                            } else if ([[activity objectForKey:kPAPActivityTypeKey] isEqualToString:kPAPActivityTypeComment] && [activity objectForKey:kPAPActivityFromUserKey]) {
-                                [commenters addObject:[activity objectForKey:kPAPActivityFromUserKey]];
+                            if ([[activity objectForKey:kPMActivityTypeKey] isEqualToString:kPMActivityTypeEndorse] && [activity objectForKey:kPMActivityFromUserKey]) {
+                                [endorsers addObject:[activity objectForKey:kPMActivityFromUserKey]];
+                            } else if ([[activity objectForKey:kPMActivityTypeKey] isEqualToString:kPMActivityTypeComment] && [activity objectForKey:kPMActivityFromUserKey]) {
+                                [commenters addObject:[activity objectForKey:kPMActivityFromUserKey]];
                             }
                             
-                            if ([[[activity objectForKey:kPAPActivityFromUserKey] objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
-                                if ([[activity objectForKey:kPAPActivityTypeKey] isEqualToString:kPAPActivityTypeLike]) {
-                                    isLikedByCurrentUser = YES;
+                            if ([[[activity objectForKey:kPMActivityFromUserKey] objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
+                                if ([[activity objectForKey:kPMActivityTypeKey] isEqualToString:kPMActivityTypeEndorse]) {
+                                    isEndorsedByCurrentUser = YES;
                                 }
                             }
                         }
                         
-                        [[PAPCache sharedCache] setAttributesForPhoto:photo likers:likers commenters:commenters likedByCurrentUser:isLikedByCurrentUser];
+                        [[PMCache sharedCache] setAttributesForSkill:skill endorsers:endorsers endorsedByCurrentUser:isEndorsedByCurrentUser];
                         
                         if (headerView.tag != section) {
                             return;
                         }
                         
-                        [headerView setLikeStatus:[[PAPCache sharedCache] isPhotoLikedByCurrentUser:photo]];
-                        [headerView.likeButton setTitle:[[[PAPCache sharedCache] likeCountForPhoto:photo] description] forState:UIControlStateNormal];
-                        [headerView.commentButton setTitle:[[[PAPCache sharedCache] commentCountForPhoto:photo] description] forState:UIControlStateNormal];
+                        [headerView setEndorseStatus:[[PMCache sharedCache] isSkillEndorsedByCurrentUser:skill]];
+                        [headerView.endorseButton setTitle:[[[PMCache sharedCache] endorseCountForSkill:skill] description] forState:UIControlStateNormal];
+//                        [headerView.commentButton setTitle:[[[PMCache sharedCache] commentCountForSkill:skill] description] forState:UIControlStateNormal];
                         
-                        if (headerView.likeButton.alpha < 1.0f || headerView.commentButton.alpha < 1.0f) {
+                        if (headerView.endorseButton.alpha < 1.0f || headerView.commentButton.alpha < 1.0f) {
                             [UIView animateWithDuration:0.200f animations:^{
-                                headerView.likeButton.alpha = 1.0f;
+                                headerView.endorseButton.alpha = 1.0f;
                                 headerView.commentButton.alpha = 1.0f;
                             }];
                         }
@@ -246,26 +249,26 @@
 
 - (PFQuery *)queryForTable {
     if (![PFUser currentUser]) {
-        PFQuery *query = [PFQuery queryWithClassName:self.className];
+        PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
         [query setLimit:0];
         return query;
     }
     
-    PFQuery *followingActivitiesQuery = [PFQuery queryWithClassName:kPAPActivityClassKey];
-    [followingActivitiesQuery whereKey:kPAPActivityTypeKey equalTo:kPAPActivityTypeFollow];
-    [followingActivitiesQuery whereKey:kPAPActivityFromUserKey equalTo:[PFUser currentUser]];
+    PFQuery *followingActivitiesQuery = [PFQuery queryWithClassName:kPMActivityClassKey];
+    [followingActivitiesQuery whereKey:kPMActivityTypeKey equalTo:kPMActivityTypeFollow];
+    [followingActivitiesQuery whereKey:kPMActivityFromUserKey equalTo:[PFUser currentUser]];
     followingActivitiesQuery.limit = 1000;
     
-    PFQuery *photosFromFollowedUsersQuery = [PFQuery queryWithClassName:self.className];
-    [photosFromFollowedUsersQuery whereKey:kPAPPhotoUserKey matchesKey:kPAPActivityToUserKey inQuery:followingActivitiesQuery];
-    [photosFromFollowedUsersQuery whereKeyExists:kPAPPhotoPictureKey];
+    PFQuery *skillsFromFollowedUsersQuery = [PFQuery queryWithClassName:self.parseClassName];
+    [skillsFromFollowedUsersQuery whereKey:kPMSkillUserKey matchesKey:kPMActivityToUserKey inQuery:followingActivitiesQuery];
+    [skillsFromFollowedUsersQuery whereKeyExists:kPMSkillPictureKey];
 
-    PFQuery *photosFromCurrentUserQuery = [PFQuery queryWithClassName:self.className];
-    [photosFromCurrentUserQuery whereKey:kPAPPhotoUserKey equalTo:[PFUser currentUser]];
-    [photosFromCurrentUserQuery whereKeyExists:kPAPPhotoPictureKey];
+    PFQuery *skillsFromCurrentUserQuery = [PFQuery queryWithClassName:self.parseClassName];
+    [skillsFromCurrentUserQuery whereKey:kPMSkillUserKey equalTo:[PFUser currentUser]];
+    [skillsFromCurrentUserQuery whereKeyExists:kPMSkillPictureKey];
 
-    PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:photosFromFollowedUsersQuery, photosFromCurrentUserQuery, nil]];
-    [query includeKey:kPAPPhotoUserKey];
+    PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:skillsFromFollowedUsersQuery, skillsFromCurrentUserQuery, nil]];
+    [query includeKey:kPMSkillUserKey];
     [query orderByDescending:@"createdAt"];
 
     // A pull-to-refresh should always trigger a network request.
@@ -303,12 +306,12 @@
 
         if (cell == nil) {
             cell = [[PMRPhotoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            [cell.photoButton addTarget:self action:@selector(didTapOnPhotoAction:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.photoButton addTarget:self action:@selector(didTapOnSkillAction:) forControlEvents:UIControlEventTouchUpInside];
         }
         
         cell.photoButton.tag = indexPath.section;
         cell.imageView.image = [UIImage imageNamed:@"PlaceholderPhoto.png"];
-        cell.imageView.file = [object objectForKey:kPAPPhotoPictureKey];
+        cell.imageView.file = [object objectForKey:kPMSkillPictureKey];
         
         // PFQTVC will take care of asynchronously downloading files, but will only load them when the tableview is not moving. If the data is there, let's load it right away.
         if ([cell.imageView.file isDataAvailable]) {
@@ -336,8 +339,8 @@
 
 #pragma mark - PAPPhotoTimelineViewController
 
-- (PAPPhotoHeaderView *)dequeueReusableSectionHeaderView {
-    for (PAPPhotoHeaderView *sectionHeaderView in self.reusableSectionHeaderViews) {
+- (PMRSkillHeaderView *)dequeueReusableSectionHeaderView {
+    for (PMRSkillHeaderView *sectionHeaderView in self.reusableSectionHeaderViews) {
         if (!sectionHeaderView.superview) {
             // we found a section header that is no longer visible
             return sectionHeaderView;
@@ -350,64 +353,64 @@
 
 #pragma mark - PAPPhotoHeaderViewDelegate
 
-- (void)photoHeaderView:(PAPPhotoHeaderView *)photoHeaderView didTapUserButton:(UIButton *)button user:(PFUser *)user {
+- (void)photoHeaderView:(PMRSkillHeaderView *)photoHeaderView didTapUserButton:(UIButton *)button user:(PFUser *)user {
     PMRAccountViewController *accountViewController = [[PMRAccountViewController alloc] initWithStyle:UITableViewStylePlain];
     [accountViewController setUser:user];
     [self.navigationController pushViewController:accountViewController animated:YES];
 }
 
-- (void)photoHeaderView:(PAPPhotoHeaderView *)photoHeaderView didTapLikePhotoButton:(UIButton *)button photo:(PFObject *)photo {
-    [photoHeaderView shouldEnableLikeButton:NO];
+- (void)skillHeaderView:(PMRSkillHeaderView *)skillHeaderView didTapEndorseSkillButton:(UIButton *)button skill:(PFObject *)skill {
+    [skillHeaderView shouldEnableEndorseButton:NO];
     
-    BOOL liked = !button.selected;
-    [photoHeaderView setLikeStatus:liked];
+    BOOL endorsed = !button.selected;
+    [skillHeaderView setEndorseStatus:endorsed];
     
     NSString *originalButtonTitle = button.titleLabel.text;
     
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
     
-    NSNumber *likeCount = [numberFormatter numberFromString:button.titleLabel.text];
-    if (liked) {
-        likeCount = [NSNumber numberWithInt:[likeCount intValue] + 1];
-        [[PAPCache sharedCache] incrementLikerCountForPhoto:photo];
+    NSNumber *endorseCount = [numberFormatter numberFromString:button.titleLabel.text];
+    if (endorsed) {
+        endorseCount = [NSNumber numberWithInt:[endorseCount intValue] + 1];
+        [[PMCache sharedCache] incrementEndorserCountForSkill:skill];
     } else {
-        if ([likeCount intValue] > 0) {
-            likeCount = [NSNumber numberWithInt:[likeCount intValue] - 1];
+        if ([endorseCount intValue] > 0) {
+            endorseCount = [NSNumber numberWithInt:[endorseCount intValue] - 1];
         }
-        [[PAPCache sharedCache] decrementLikerCountForPhoto:photo];
+        [[PMCache sharedCache] decrementEndorserCountForSkill:skill];
     }
     
-    [[PAPCache sharedCache] setPhotoIsLikedByCurrentUser:photo liked:liked];
+    [[PMCache sharedCache] setSkillIsEndorsedByCurrentUser:skill endorsed:endorsed];
     
-    [button setTitle:[numberFormatter stringFromNumber:likeCount] forState:UIControlStateNormal];
+    [button setTitle:[numberFormatter stringFromNumber:endorseCount] forState:UIControlStateNormal];
     
-    if (liked) {
-        [PAPUtility likePhotoInBackground:photo block:^(BOOL succeeded, NSError *error) {
-            PAPPhotoHeaderView *actualHeaderView = (PAPPhotoHeaderView *)[self tableView:self.tableView viewForHeaderInSection:button.tag];
-            [actualHeaderView shouldEnableLikeButton:YES];
-            [actualHeaderView setLikeStatus:succeeded];
+    if (endorsed) {
+        [PMUtility endorseSkillInBackground:skill block:^(BOOL succeeded, NSError *error) {
+            PMRSkillHeaderView *actualHeaderView = (PMRSkillHeaderView *)[self tableView:self.tableView viewForHeaderInSection:button.tag];
+            [actualHeaderView shouldEnableEndorseButton:YES];
+            [actualHeaderView setEndorseStatus:succeeded];
             
             if (!succeeded) {
-                [actualHeaderView.likeButton setTitle:originalButtonTitle forState:UIControlStateNormal];
+                [actualHeaderView.endorseButton setTitle:originalButtonTitle forState:UIControlStateNormal];
             }
         }];
     } else {
-        [PAPUtility unlikePhotoInBackground:photo block:^(BOOL succeeded, NSError *error) {
-            PAPPhotoHeaderView *actualHeaderView = (PAPPhotoHeaderView *)[self tableView:self.tableView viewForHeaderInSection:button.tag];
-            [actualHeaderView shouldEnableLikeButton:YES];
-            [actualHeaderView setLikeStatus:!succeeded];
+        [PMUtility removeEndorsementForSkillInBackground:skill block:^(BOOL succeeded, NSError *error) {
+            PMRSkillHeaderView *actualHeaderView = (PMRSkillHeaderView *)[self tableView:self.tableView viewForHeaderInSection:button.tag];
+            [actualHeaderView shouldEnableEndorseButton:YES];
+            [actualHeaderView setEndorseStatus:!succeeded];
             
             if (!succeeded) {
-                [actualHeaderView.likeButton setTitle:originalButtonTitle forState:UIControlStateNormal];
+                [actualHeaderView.endorseButton setTitle:originalButtonTitle forState:UIControlStateNormal];
             }
         }];
     }
 }
 
-- (void)photoHeaderView:(PAPPhotoHeaderView *)photoHeaderView didTapCommentOnPhotoButton:(UIButton *)button  photo:(PFObject *)photo {
-    PAPPhotoDetailsViewController *photoDetailsVC = [[PAPPhotoDetailsViewController alloc] initWithPhoto:photo];
-    [self.navigationController pushViewController:photoDetailsVC animated:YES];
+- (void)skillHeaderView:(PMRSkillHeaderView *)skillHeaderView didTapCommentOnSkillButton:(UIButton *)button skill:(PFObject *)skill {
+    PMRSkillDetailsViewController *skillDetailsVC = [[PMRSkillDetailsViewController alloc] initWithSkill:skill];
+    [self.navigationController pushViewController:skillDetailsVC animated:YES];
 }
 
 
@@ -424,22 +427,22 @@
     return nil;
 }
 
-- (void)userDidLikeOrUnlikePhoto:(NSNotification *)note {
+- (void)userDidEndorseOrUnendorseSkill:(NSNotification *)note {
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
 }
 
-- (void)userDidCommentOnPhoto:(NSNotification *)note {
+- (void)userDidCommentOnSkill:(NSNotification *)note {
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
 }
 
-- (void)userDidDeletePhoto:(NSNotification *)note {
+- (void)userDidDeleteSkill:(NSNotification *)note {
     // refresh timeline after a delay
     [self performSelector:@selector(loadObjects) withObject:nil afterDelay:1.0f];
 }
 
-- (void)userDidPublishPhoto:(NSNotification *)note {
+- (void)userDidPublishSkill:(NSNotification *)note {
     if (self.objects.count > 0) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
@@ -453,11 +456,11 @@
 }
 
 
-- (void)didTapOnPhotoAction:(UIButton *)sender {
-    PFObject *photo = [self.objects objectAtIndex:sender.tag];
-    if (photo) {
-        PAPPhotoDetailsViewController *photoDetailsVC = [[PAPPhotoDetailsViewController alloc] initWithPhoto:photo];
-        [self.navigationController pushViewController:photoDetailsVC animated:YES];
+- (void)didTapOnSkillAction:(UIButton *)sender {
+    PFObject *skill = [self.objects objectAtIndex:sender.tag];
+    if (skill) {
+        PMRSkillDetailsViewController *skillDetailsVC = [[PMRSkillDetailsViewController alloc] initWithSkill:skill];
+        [self.navigationController pushViewController:skillDetailsVC animated:YES];
     }
 }
 
