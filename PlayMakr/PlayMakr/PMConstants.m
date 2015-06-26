@@ -28,7 +28,7 @@ NSString *const PAPTabBarControllerDidFinishEditingPhotoNotification            
 NSString *const PAPTabBarControllerDidFinishImageFileUploadNotification         = @"com.parse.Anypic.tabBarController.didFinishImageFileUploadNotification";
 NSString *const PMRSkillDetailsViewControllerUserDeletedSkillNotification       = @"Oliver.PlayMakr.skillDetailsViewController.userDeletedSkill";
 NSString *const PMSkillDetailsViewControllerUserEndorsedUnendorsedSkillNotification  = @"Oliver.PlayMakr.skillDetailsViewController.userEndorsedUnendorsedInDetailsViewNotification";
-NSString *const PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification   = @"Oliver.PlayMakr.skillDetailsViewController.userCommentedOnSkillInDetailsViewNotification";
+NSString *const PMRSkillDetailsViewControllerUserCommentedOnSkillNotification   = @"Oliver.PlayMakr.skillDetailsViewController.userCommentedOnSkillInDetailsViewNotification";
 
 
 #pragma mark - User Info Keys

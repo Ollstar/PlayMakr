@@ -64,6 +64,7 @@
 		A748FFE11B37B0D7005005EE /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = A748FFDA1B37B0D7005005EE /* home.png */; };
 		A748FFE21B37B0D7005005EE /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A748FFDB1B37B0D7005005EE /* home@2x.png */; };
 		A748FFE31B37B0D7005005EE /* NothingFoundCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A748FFDC1B37B0D7005005EE /* NothingFoundCell.xib */; };
+		A750CA021B3E06B200044C71 /* PMREditButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A750CA011B3E06B200044C71 /* PMREditButtonItem.m */; };
 		A7E637FC1B3968BE009B652B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73927B61B35DB18007F5461 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -169,6 +170,8 @@
 		A748FFDB1B37B0D7005005EE /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@2x.png"; sourceTree = "<group>"; };
 		A748FFDC1B37B0D7005005EE /* NothingFoundCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NothingFoundCell.xib; sourceTree = "<group>"; };
 		A748FFF01B37C8A6005005EE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A750CA001B3E06B200044C71 /* PMREditButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMREditButtonItem.h; sourceTree = "<group>"; };
+		A750CA011B3E06B200044C71 /* PMREditButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMREditButtonItem.m; sourceTree = "<group>"; };
 		A7E637E71B3946B4009B652B /* PMUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMUtility.h; sourceTree = "<group>"; };
 		A7E637E81B3946B4009B652B /* PMUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMUtility.m; sourceTree = "<group>"; };
 		A7E637EA1B3946F8009B652B /* PMCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMCache.h; sourceTree = "<group>"; };
@@ -295,6 +298,8 @@
 			children = (
 				A72A3EE41B3A8807000C6F78 /* PMRSettingsButtonItem.h */,
 				A72A3EE51B3A8807000C6F78 /* PMRSettingsButtonItem.m */,
+				A750CA001B3E06B200044C71 /* PMREditButtonItem.h */,
+				A750CA011B3E06B200044C71 /* PMREditButtonItem.m */,
 				A72A3EB31B39D88A000C6F78 /* PMRImageView.h */,
 				A72A3EB41B39D88A000C6F78 /* PMRImageView.m */,
 				A72A3EB51B39D88A000C6F78 /* PMRProfileImageView.h */,
@@ -642,6 +647,7 @@
 				A72A3EC81B39DC1E000C6F78 /* UIImage+RoundedCornerAdditions.m in Sources */,
 				A73927641B35C651007F5461 /* AppDelegate.m in Sources */,
 				A72A3ECC1B39DEF7000C6F78 /* TTTTimeIntervalFormatter.m in Sources */,
+				A750CA021B3E06B200044C71 /* PMREditButtonItem.m in Sources */,
 				A73927611B35C651007F5461 /* main.m in Sources */,
 				A72A3EE21B3A87B1000C6F78 /* PMRPhotoCell.m in Sources */,
 				A72A3EFC1B3A8939000C6F78 /* PMRAccountViewController.m in Sources */,

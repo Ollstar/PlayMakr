@@ -33,7 +33,7 @@ extern NSString *const PAPTabBarControllerDidFinishEditingPhotoNotification;
 extern NSString *const PAPTabBarControllerDidFinishImageFileUploadNotification;
 extern NSString *const PMRSkillDetailsViewControllerUserDeletedSkillNotification;
 extern NSString *const PMSkillDetailsViewControllerUserEndorsedUnendorsedSkillNotification;
-extern NSString *const PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification;
+extern NSString *const PMRSkillDetailsViewControllerUserCommentedOnSkillNotification;
 
 
 #pragma mark - User Info Keys

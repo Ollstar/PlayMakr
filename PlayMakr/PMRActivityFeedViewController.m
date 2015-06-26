@@ -27,10 +27,10 @@
 @property (nonatomic, strong) UIView *blankTimelineView;
 @end
 
-static NSString *const kPAPActivityTypeLikeString = @"liked your photo";
-static NSString *const kPAPActivityTypeCommentString = @"commented on your photo";
+static NSString *const kPAPActivityTypeLikeString = @"endorsed your game";
+static NSString *const kPAPActivityTypeCommentString = @"commented on your game";
 static NSString *const kPAPActivityTypeFollowString = @"started following you";
-static NSString *const kPAPActivityTypeJoinedString = @"joined Anypic";
+static NSString *const kPAPActivityTypeJoinedString = @"joined PlayMakr";
 
 @implementation PMRActivityFeedViewController
 
@@ -74,7 +74,7 @@ static NSString *const kPAPActivityTypeJoinedString = @"joined Anypic";
     [texturedBackgroundView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundLeather.png"]]];
     self.tableView.backgroundView = texturedBackgroundView;
 
-    self.navigationItem.title= @"The Feed";
+    self.navigationItem.title= @"Feed";
 
     // Add Settings button
     self.navigationItem.rightBarButtonItem = [[PMRSettingsButtonItem alloc] initWithTarget:self action:@selector(settingsButtonAction:)];

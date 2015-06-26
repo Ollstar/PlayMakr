@@ -14,6 +14,7 @@
 #import "PMUtility.h"
 #import <SCLAlertView.h>
 #import "UIImage+ResizeAdditions.h"
+#import "PMREditButtonItem.h"
 
 
 
@@ -41,7 +42,7 @@
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setFrame:CGRectMake( 0.0f, 0.0f, 52.0f, 32.0f)];
     [backButton setTitle:@"Back" forState:UIControlStateNormal];
-    [backButton setTitleColor:[UIColor colorWithRed:214.0f/255.0f green:210.0f/255.0f blue:197.0f/255.0f alpha:1.0] forState:UIControlStateNormal];
+    [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [[backButton titleLabel] setFont:[UIFont boldSystemFontOfSize:[UIFont smallSystemFontSize]]];
     [backButton setTitleEdgeInsets:UIEdgeInsetsMake( 0.0f, 5.0f, 0.0f, 0.0f)];
     [backButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -123,14 +124,14 @@
     [userDisplayNameLabel setFont:[UIFont boldSystemFontOfSize:18.0f]];
     [self.headerView addSubview:userDisplayNameLabel];
     
-    [skillCountLabel setText:@"0 skills"];
+    [skillCountLabel setText:@"0 games"];
     
     PFQuery *querySkillCount = [PFQuery queryWithClassName:@"Skill"];
     [querySkillCount whereKey:kPMSkillUserKey equalTo:self.user];
     [querySkillCount setCachePolicy:kPFCachePolicyCacheThenNetwork];
     [querySkillCount countObjectsInBackgroundWithBlock:^(int number, NSError *error) {
         if (!error) {
-            [skillCountLabel setText:[NSString stringWithFormat:@"%d skill%@", number, number==1?@"":@"s"]];
+            [skillCountLabel setText:[NSString stringWithFormat:@"%d game%@", number, number==1?@"":@"s"]];
             [[PMCache sharedCache] setSkillCount:[NSNumber numberWithInt:number] user:self.user];
         }
     }];
@@ -416,7 +417,8 @@
 }
 
 - (void)configureEditButton {
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editButtonTap:)];
+    self.navigationItem.rightBarButtonItem = [[PMREditButtonItem alloc] initWithTarget:self action:@selector(editButtonTap:)];
+
 }
 
 

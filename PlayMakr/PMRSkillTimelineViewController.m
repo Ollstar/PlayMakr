@@ -34,7 +34,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:PMUtilityUserFollowingChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:PMSkillDetailsViewControllerUserEndorsedUnendorsedSkillNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:PMUtilityUserEndorsedUnendorsedSkillCallbackFinishedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:PMRSkillDetailsViewControllerUserCommentedOnSkillNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:PMRSkillDetailsViewControllerUserDeletedSkillNotification object:nil];
 }
 
@@ -82,7 +82,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidDeleteSkill:) name:PMRSkillDetailsViewControllerUserDeletedSkillNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidEndorseOrUnendorseSkill:) name:PMSkillDetailsViewControllerUserEndorsedUnendorsedSkillNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidEndorseOrUnendorseSkill:) name:PMUtilityUserEndorsedUnendorsedSkillCallbackFinishedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidCommentOnSkill:) name:PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidCommentOnSkill:) name:PMRSkillDetailsViewControllerUserCommentedOnSkillNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -363,7 +363,10 @@
 }
 
 - (void)skillHeaderView:(PMRSkillHeaderView *)skillHeaderView didTapEndorseSkillButton:(UIButton *)button skill:(PFObject *)skill {
+    
     [skillHeaderView shouldEnableEndorseButton:NO];
+    skill = [self.objects objectAtIndex:button.tag];
+
     
     BOOL endorsed = !button.selected;
     [skillHeaderView setEndorseStatus:endorsed];
@@ -412,8 +415,11 @@
 }
 
 - (void)skillHeaderView:(PMRSkillHeaderView *)skillHeaderView didTapCommentOnSkillButton:(UIButton *)button skill:(PFObject *)skill {
-    PMRSkillDetailsViewController *skillDetailsVC = [[PMRSkillDetailsViewController alloc] initWithSkill:skill];
-    [self.navigationController pushViewController:skillDetailsVC animated:YES];
+    skill = [self.objects objectAtIndex:button.tag];
+    if (skill) {
+        PMRSkillDetailsViewController *skillDetailsVC = [[PMRSkillDetailsViewController alloc] initWithSkill:skill];
+        [self.navigationController pushViewController:skillDetailsVC animated:YES];
+    }
 }
 
 

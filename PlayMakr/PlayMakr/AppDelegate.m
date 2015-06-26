@@ -139,7 +139,7 @@
                 tabBarItem.badgeValue = [numberFormatter stringFromNumber:newBadgeValue];
             } else {
                 tabBarItem.badgeValue = @"1";
-            }
+            }               
         }
     }
 }
@@ -273,10 +273,10 @@
     [homeTabBarItem setSelectedImage:[[UIImage imageNamed:@"IconHomeSelected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
 
     [homeTabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                            [UIColor colorWithRed:86.0f/255.0f green:55.0f/255.0f blue:42.0f/255.0f alpha:1.0f], NSForegroundColorAttributeName,
+                                            [UIColor whiteColor], NSForegroundColorAttributeName,
                                             nil] forState:UIControlStateNormal];
     [homeTabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                            [UIColor colorWithRed:129.0f/255.0f green:99.0f/255.0f blue:69.0f/255.0f alpha:1.0f], NSForegroundColorAttributeName,
+                                            [UIColor whiteColor], NSForegroundColorAttributeName,
                                             nil] forState:UIControlStateSelected];
     
     UITabBarItem *activityFeedTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Activity" image:nil tag:0];
@@ -284,10 +284,10 @@
     [activityFeedTabBarItem setSelectedImage:[[UIImage imageNamed:@"IconTimelineSelected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
 
     [activityFeedTabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                    [UIColor colorWithRed:86.0f/255.0f green:55.0f/255.0f blue:42.0f/255.0f alpha:1.0f], NSForegroundColorAttributeName,
+                                                    [UIColor whiteColor], NSForegroundColorAttributeName,
                                                     nil] forState:UIControlStateNormal];
     [activityFeedTabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                    [UIColor colorWithRed:129.0f/255.0f green:99.0f/255.0f blue:69.0f/255.0f alpha:1.0f], NSForegroundColorAttributeName,
+                                                    [UIColor whiteColor], NSForegroundColorAttributeName,
                                                     nil] forState:UIControlStateSelected];
     
     [homeNavigationController setTabBarItem:homeTabBarItem];
