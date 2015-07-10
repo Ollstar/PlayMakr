@@ -8,7 +8,7 @@
 #import "PMRSkillTimelineViewController.h"
 #import "PMRFindFriendsViewController.h"
 
-@interface PMRHomeViewController : PMRSkillTimelineViewController
+@interface PMRHomeViewController : PMRSkillTimelineViewController <PMRSkillHeaderViewDelegate>
 
 @property (nonatomic, assign, getter = isFirstLaunch) BOOL firstLaunch;
 

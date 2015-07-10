@@ -147,7 +147,7 @@ static TTTTimeIntervalFormatter *timeFormatter;
     }
 
     if (self.user) {
-        CGRect nameRect = [self.nameButton.titleLabel.text boundingRectWithSize:CGSizeMake(nameMaxWidth, CGFLOAT_MAX) options:NSStringDrawingTruncatesLastVisibleLine attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:13.0f]} context:nil];
+        CGRect nameRect = [self.nameButton.titleLabel.text boundingRectWithSize:CGSizeMake(nameMaxWidth, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:13.0f]} context:nil];
         CGSize nameSize = nameRect.size;
         CGFloat nameWidth = ceilf(nameSize.width);
 
